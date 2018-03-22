@@ -1,6 +1,6 @@
 from designer import homeScreen
 from PyQt5.QtCore import QUrl
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QMessageBox,QTableWidgetItem
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 import sys
 from PyQt5.QtCore import Qt
@@ -24,11 +24,14 @@ class MainUi(QMainWindow, homeScreen.Ui_MainWindow):
         self.label.setToolTip("Label 1")
         self.label_2.setToolTip("Label 2")
         self.pushButton.setText("Schedule")
-        self.pushButton.clicked.connect(self.buttonClicked)
+        self.pushButton.clicked.connect(self.popTable)
         self.pushButton_2.setText("Defects")
         self.label.setText("capacity")
         self.label_2.setText("temp")
 
+    def popTable(self):
+        for i in range(15):
+            self.tableWidget.setItem(i, 0, QTableWidgetItem("TEXT"+str(i)))
 
 
     def closeEvent(self, event):
