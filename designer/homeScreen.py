@@ -50,14 +50,5 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Schedule"))
-        self.pushButton_2.setText(_translate("MainWindow", "Defects"))
-        self.label.setText(_translate("MainWindow", "capacity"))
-        self.label_2.setText(_translate("MainWindow", "temp"))
 
