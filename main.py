@@ -6,6 +6,8 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, uic
 from datetime import time
+import urllib.request
+import json
 
 
 class MainUi(QMainWindow, homeScreen.Ui_MainWindow):
@@ -25,13 +27,15 @@ class MainUi(QMainWindow, homeScreen.Ui_MainWindow):
         self.label_2.setToolTip("Label 2")
         self.pushButton.setText("Schedule")
         self.pushButton.clicked.connect(self.popTable)
-        self.pushButton_2.setText("Defects")
+        self.pushButton_2.setText   ("Defects")
         self.label.setText("capacity")
         self.label_2.setText("temp")
 
+
     def popTable(self):
-        for i in range(15):
-            self.tableWidget.setItem(i, 0, QTableWidgetItem("TEXT"+str(i)))
+        contents = urllib.request.urlopen("http://markb.pythonanywhere.com/getdata").read() #b'{"Reservation": {"ReservationID": 10, "TimeSlotFrom": 2, "TimeSlotTo": 3, "TimeFrom": "10:50", "TimeTo": "11:40", "Date": "12-03-2003", "Username": "OmarA", "Lesson": "ICTLAB", "Room": "WN4.101"}}'
+        data = json.load(contents)
+        self.tableWidget.setItem(int(data["Reservation"]["TimeSlotFrom"]), 0, QTableWidgetItem(str(data["Reservation"]["TimeFrom"])+ str(data["Reservation"]["TimeTo"]) + str(data["Reservation"]["Lesson"]) + str(data["Reservation"]["ICTLAB"])))
 
 
     def closeEvent(self, event):
