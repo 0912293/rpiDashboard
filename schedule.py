@@ -1,4 +1,4 @@
-from designer import homeScreen
+from designer import scheduleScreen
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QMessageBox,QTableWidgetItem
 from PyQt5.QtWebEngineWidgets import QWebEngineView
@@ -10,7 +10,7 @@ import urllib.request
 import json
 
 
-class MainUi(QMainWindow, homeScreen.Ui_MainWindow):
+class MainUi(QMainWindow, scheduleScreen.Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
