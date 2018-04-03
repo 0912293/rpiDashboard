@@ -1,5 +1,4 @@
 from designer import main
-import schedule
 from PyQt5.QtCore import QUrl, QStringListModel
 from PyQt5.QtGui import QStandardItemModel, QPixmap ,QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QMessageBox,QTableWidgetItem
