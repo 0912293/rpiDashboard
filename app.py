@@ -26,8 +26,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.initUI()
-        self.getData()
+        self.fillEmptyList()
+        self.getSchedule()
         self.getTimeTable()
+        self.getDefects()
 
         now = datetime.datetime.now()
         self.day = now.day
@@ -81,6 +83,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.defectsBtn.setText("Defects")
         self.lblCapacity_home.setText("capacity")
         self.lblTemperature_home.setText("temp")
+
+        self.calendarWidget.clicked.connect(self.getSchedule)
 
         self.monthLeft.clicked.connect(self.scheduleButtons)
         self.monthRight.clicked.connect(self.scheduleButtons)
@@ -161,6 +165,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             if self.slot <self.maxSlots:
                 self.slot += 1
             self.lcdSlots.display(self.slot)
+        self.getScheduler()
+
+    def updateScheduler(self):
+        self.getSchedule()
 
     def radioCheck(self):
         sender = self.sender()
@@ -299,12 +307,22 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
 #----json parse and table fill----
 
-    def getData(self):
-        contents = urllib.request.urlopen(
-            "http://markb.pythonanywhere.com/reservation").read()
+    def getScheduler(self):
+        date = self.day + self.month  #TODO format correctly
+        self.getData(date,"http://markb.pythonanywhere.com/reservation",2)
+
+    def getSchedule(self):
+        date = self.calendarWidget.selectedDate()
+        self.getData(date,"http://markb.pythonanywhere.com/reservation",0)
+
+    def getDefects(self):
+        self.getData(datetime.datetime.now(),"http://markb.pythonanywhere.com/reservation",1)
+
+    def getData(self,date,url,type):
+        contents = urllib.request.urlopen(url).read()
         data = json.loads(contents.decode('utf-8'))
         print(json.dumps(data, indent=4, sort_keys=True))
-        self.parseData(data)
+        self.parseData(data,type)
 
     def fillEmptyList(self):
         for i in range(15):
@@ -317,10 +335,20 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.jsonData[time] = (str(time+1)+string)
             time += 1
 
-    def parseData(self, data):
-        self.fillEmptyList()
-        for i in data:
-            self.enterReservation(int(i["timeslot_from"]), int(i["timeslot_to"])," %s %s %s %s %s"%(str(i["time_from"]),str(i["time_to"]),str(i["room"]),str(i["lesson"]),str(i["username"])))
+    def parseData(self, data,type):
+        if type == 0:
+            for i in data:
+                self.enterReservation(int(i["timeslot_from"]), int(i["timeslot_to"])," %s %s %s %s %s"%(str(i["time_from"]),str(i["time_to"]),str(i["room"]),str(i["lesson"]),str(i["username"])))
+        elif type == 1:
+            self.updateDefects()
+        elif type == 2:
+            self.updateScheduler()
+
+    def updateDefects(self):
+        print("Waiting for implementation somewhere else")  # waiting for defects to be added to api calls
+
+    def updateScheduler(self):
+        print("Waiting for implementation somewhere else")  # waiting for api to give back schedule for selected day
 
     def getTimeTable(self):
         model = QStringListModel(self.jsonData)
