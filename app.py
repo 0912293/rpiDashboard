@@ -1,21 +1,20 @@
 from designer import main
-from PyQt5.QtCore import QUrl, QStringListModel
-from PyQt5.QtGui import QStandardItemModel, QPixmap ,QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QMessageBox,QTableWidgetItem
-from PyQt5.QtWebEngineWidgets import QWebEngineView
-import sys
-from PyQt5.QtCore import Qt, QModelIndex
-from PyQt5 import QtCore, QtGui, uic
+from PyQt5.QtCore import Qt, QStringListModel
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from datetime import time
 import urllib.request
 import json
 import qrcode
 import sys,os
 import datetime
+import time
+import RPi.GPIO as GPIO
+import threading
+from time import gmtime, strftime
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
-
         self.jsonData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
@@ -35,12 +34,20 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.lcdSlots.display(self.slot)
 
         self.room = "WN4.101"
+        self.passCounter = 0
 
         self.dir = os.path.dirname(__file__)
-        # self.filename = os.path.join(self.dir, 'qr', 'qr.jpg')    #TODO Fix relative path
-        self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"
-        self.stackedWidget.setCurrentIndex(1)
+        #self.filename = "C:/Users/kevin/PycharmProjects/RaspberryPi/qr/qr.png"  # uncomment for testing
+        self.filename= "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
+        self.stackedWidget.setCurrentIndex(0)
 
+        thread = threading.Thread(target=self.distanceSensor, args=())
+        thread.daemon = True
+        thread.start()
+
+        thread2 = threading.Thread(target=self.clock, args=())
+        thread2.daemon = True
+        thread2.start()
 
     def initUI(self):
         QMainWindow.showFullScreen(self)
@@ -80,6 +87,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.slot13.clicked.connect(self.radioCheck)
         self.slot14.clicked.connect(self.radioCheck)
         self.slot15.clicked.connect(self.radioCheck)
+
+        self.wakeButton.clicked.connect(self.wakeup)
 
     def menuButtons(self):
         sender = self.sender()
@@ -184,6 +193,9 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.maxSlots = 1
         self.maxslots()
 
+    def wakeup(self):
+        self.stackedWidget.setCurrentIndex(1)
+
     def maxslots(self):
         if self.slot>self.maxSlots:
             self.slot=self.maxSlots
@@ -208,6 +220,49 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             pix2 = qrcode.make('{"Defunct": {"Type": "EquipMissing", "Room": "WN4.101"}}')
             pix2.save(self.filename)
             print("qr generated")
+
+    def distanceSensor(self):
+        GPIO.setmode(GPIO.BOARD)
+        PIN_TRIGGER = 7
+        PIN_ECHO = 11
+        GPIO.setup(PIN_TRIGGER, GPIO.OUT)
+        GPIO.setup(PIN_ECHO, GPIO.IN)
+        GPIO.output(PIN_TRIGGER, GPIO.LOW)
+        print("Waiting for sensor to settle")
+        time.sleep(2)
+        print("Calculating distance")
+        pulse_start_time = 0
+        pulse_end_time = 0
+        try:
+            while True:
+                time.sleep(0.1)
+                GPIO.output(PIN_TRIGGER, GPIO.HIGH)
+                time.sleep(0.00001)
+                GPIO.output(PIN_TRIGGER, GPIO.LOW)
+                while GPIO.input(PIN_ECHO) == 0:
+                    pulse_start_time = time.time()
+                while GPIO.input(PIN_ECHO) == 1:
+                    pulse_end_time = time.time()
+                pulse_duration = pulse_end_time - pulse_start_time
+                distance = round(pulse_duration * 17150, 2)
+                self.lblCapacity_home.setText("Distance:"+str(distance)+"cm")
+                if distance<200 and self.stackedWidget.currentIndex() is 0:
+                    self.stackedWidget.setCurrentIndex(1)
+                    start = time.time()
+                elif distance<50 and distance is not 0:
+                    self.passCounter += 1
+                    self.distanceTest.setText(str(self.passCounter))
+                    time.sleep(0.5)
+                if start-time.time() > 3 and distance>200:
+                    self.stackedWidget.setCurrentIndex(0)
+        finally:
+            print('cleaning')
+            GPIO.cleanup()
+
+    def clock(self):
+        while True:
+            time.sleep(1)
+            self.wakeButton.setText(strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
 
 #----json parse and table fill----
 
@@ -257,7 +312,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
 #----debug stuff---Remove later------
     def keyPressEvent(self, e):
-
         if e.key() == Qt.Key_Escape:
             self.closeEvent()
 
