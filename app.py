@@ -12,10 +12,15 @@ import time
 import RPi.GPIO as GPIO
 import threading
 from time import gmtime, strftime
+import savestuff
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
         self.jsonData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        self.dir = os.path.dirname(__file__)
+        self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
+        #self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
+
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.initUI()
@@ -36,11 +41,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.room = "WN4.101"
         self.passCounter = 0
 
-        self.dir = os.path.dirname(__file__)
-        #self.filename = "C:/Users/kevin/PycharmProjects/RaspberryPi/qr/qr.png"  # uncomment for testing
-        self.filename= "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
-        self.stackedWidget.setCurrentIndex(0)
-
         thread = threading.Thread(target=self.distanceSensor, args=())
         thread.daemon = True
         thread.start()
@@ -48,6 +48,16 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         thread2 = threading.Thread(target=self.clock, args=())
         thread2.daemon = True
         thread2.start()
+
+        self.start = 0
+
+        if os.path.exists("C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json") is False:     # ??? not sure why savestuff.check doesnt work
+            self.stackedWidget.setCurrentIndex(4)
+            savestuff.create()
+            self.savebtn.clicked.connect(self.savePress)
+        else:
+            self.stackedWidget.setCurrentIndex(0)
+
 
     def initUI(self):
         QMainWindow.showFullScreen(self)
@@ -92,6 +102,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def menuButtons(self):
         sender = self.sender()
+        self.resetTime()
         if sender is self.scheduleBtn:
             self.stackedWidget.setCurrentIndex(2)
         elif sender is self.defectsBtn:
@@ -118,6 +129,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def scheduleButtons(self):
         sender = self.sender()
+        self.resetTime()
         if sender is self.dayLeft:
             if self.day >1:
                 self.day -= 1
@@ -145,6 +157,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def radioCheck(self):
         sender = self.sender()
+        self.resetTime()
         self.maxslots()
         if sender is self.slot1:
             self.selectedSlot = 1
@@ -194,6 +207,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.maxslots()
 
     def wakeup(self):
+        self.resetTime()
         self.stackedWidget.setCurrentIndex(1)
 
     def maxslots(self):
@@ -202,7 +216,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.lcdSlots.display(self.slot)
 
     def generateQr(self,type):
-        print(self.filename)
+        print(self.filename+'qr/qr.png')
         if type == 0:
             print(self.lcdDay.intValue())
             print(self.lcdMonth.intValue())
@@ -246,14 +260,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                 pulse_duration = pulse_end_time - pulse_start_time
                 distance = round(pulse_duration * 17150, 2)
                 self.lblCapacity_home.setText("Distance:"+str(distance)+"cm")
-                if distance<200 and self.stackedWidget.currentIndex() is 0:
+                if distance<80 and self.stackedWidget.currentIndex() is 0:
                     self.stackedWidget.setCurrentIndex(1)
-                    start = time.time()
-                elif distance<50 and distance is not 0:
+                    self.start = time.time()
+                elif distance<200 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
                     time.sleep(0.5)
-                if start-time.time() > 3 and distance>200:
+                if (time.time())-self.start > 10 and distance > 80:
                     self.stackedWidget.setCurrentIndex(0)
         finally:
             print('cleaning')
@@ -263,6 +277,13 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         while True:
             time.sleep(1)
             self.wakeButton.setText(strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
+
+    def resetTime(self):
+        self.start = time.time()
+
+    def savePress(self):
+        savestuff.write(str(self.roomNumTbox.text()))
+        self.stackedWidget.setCurrentIndex(0)
 
 #----json parse and table fill----
 
