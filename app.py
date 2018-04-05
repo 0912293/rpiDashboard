@@ -19,7 +19,9 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.jsonData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
         self.dir = os.path.dirname(__file__)
         self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
+        self.filename2 = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"
         #self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
+        #self.filename2 = "/home/pi/RaspberryPi/setup.json"
 
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
@@ -38,7 +40,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.lcdMonth.display(self.month)
         self.lcdSlots.display(self.slot)
 
-        self.room = "WN4.101"
         self.passCounter = 0
 
         thread = threading.Thread(target=self.distanceSensor, args=())
@@ -51,12 +52,18 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.start = 0
 
-        if os.path.exists("C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json") is False:     # ??? not sure why savestuff.check doesnt work
+        self.getDefunctTypes()
+
+        if os.path.exists(self.filename2) is False:     # ??? not sure why savestuff.check doesnt work
             self.stackedWidget.setCurrentIndex(4)
             savestuff.create()
             self.savebtn.clicked.connect(self.savePress)
+            self.room = savestuff.read()
         else:
+            self.room = savestuff.read()
             self.stackedWidget.setCurrentIndex(0)
+
+
 
 
     def initUI(self):
@@ -225,15 +232,20 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             print(self.selectedSlot)
             print(int(self.selectedSlot)+int(self.lcdSlots.intValue()-1))
             pix = qrcode.make(
-                '{"Reservation": {"TimeSlotFrom": %s, "TimeSlotTo": %s, "Date": "%s-%s-%s", "Room": "%s"}}'%(self.selectedSlot,
+                '{"Reservation": {"TimeSlotFrom": %s, "TimeSlotTo": %s, "Date": "%s-%s-%s", "Room": "%s"}}' % (self.selectedSlot,
                                                                                                              int(self.selectedSlot)+int(self.lcdSlots.intValue()-1),
                                                                                                              self.lcdDay.intValue(),self.lcdMonth.intValue(),self.year,self.room))
             pix.save(self.filename)
             print("qr generated")
         elif type == 1:
-            pix2 = qrcode.make('{"Defunct": {"Type": "EquipMissing", "Room": "WN4.101"}}')
+            pix2 = qrcode.make('{"Defunct": {"Type": %s, "Room": %s}}' % (self.defectTypeBox.currentText(), self.room))
             pix2.save(self.filename)
             print("qr generated")
+
+    def getDefunctTypes(self):
+        self.defectTypeBox.addItem("type 1")
+        self.defectTypeBox.addItem("type 2")
+        self.defectTypeBox.addItem("type 3")
 
     def distanceSensor(self):
         GPIO.setmode(GPIO.BOARD)
@@ -267,7 +279,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
                     time.sleep(0.5)
-                if (time.time())-self.start > 10 and distance > 80:
+                if (time.time())-self.start > 10 and distance > 80 and self.stackedWidget.currentIndex() is not 4:
                     self.stackedWidget.setCurrentIndex(0)
         finally:
             print('cleaning')

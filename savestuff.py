@@ -2,7 +2,7 @@ import json
 import os.path
 
 filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"  # uncomment for testing
-# filename = "/home/pi/RaspberryPi/setup.json"   #uncomment for rpi
+#filename = "/home/pi/RaspberryPi/setup.json"   #uncomment for rpi
 
 
 def check():
@@ -13,7 +13,7 @@ def create():
     print('1')
     file = open(filename,"a+")
     print('2')
-    file.write('test')
+    file.write('{\"room\":\"test\"}')
     print('3')
     file.close()
 
@@ -27,5 +27,5 @@ def write(room):
 
 def read():
     with open(filename,'r+') as file:
-        data = json.loads(file.decode('utf-8'))
+        data = json.load(file)
         return data['room']
