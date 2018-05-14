@@ -23,13 +23,26 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         #self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
         #self.filename2 = "/home/pi/RaspberryPi/setup.json"
 
+
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.initUI()
+
+        if os.path.exists(self.filename2) is False:     # ??? not sure why savestuff.check doesnt work
+            self.stackedWidget.setCurrentIndex(4)
+            savestuff.create()
+            self.savebtn.clicked.connect(self.savePress)
+            self.room = savestuff.read()
+        else:
+            self.room = savestuff.read()
+            self.stackedWidget.setCurrentIndex(0)
+            print(self.room)
+
         self.fillEmptyList()
         self.getSchedule()
         self.getTimeTable()
         self.getDefects()
+
 
         now = datetime.datetime.now()
         self.day = now.day
@@ -55,16 +68,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.start = 0
 
         self.getDefunctTypes()
-
-        if os.path.exists(self.filename2) is False:     # ??? not sure why savestuff.check doesnt work
-            self.stackedWidget.setCurrentIndex(4)
-            savestuff.create()
-            self.savebtn.clicked.connect(self.savePress)
-            self.room = savestuff.read()
-        else:
-            self.room = savestuff.read()
-            self.stackedWidget.setCurrentIndex(0)
-
 
 
 
@@ -125,14 +128,12 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.scheduleQr.clear()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            print("boop")
             self.generateQr(1)
             self.pixmap = QPixmap(self.filename)
             print(self.pixmap)
             self.defectQr.setPixmap(self.pixmap.scaled(250,250))
             print("qr set")
         elif sender is self.generate:
-            print("boop")
             self.generateQr(0)
             self.pixmap = QPixmap(self.filename)
             self.scheduleQr.setPixmap(self.pixmap.scaled(250,250))
@@ -165,7 +166,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             if self.slot <self.maxSlots:
                 self.slot += 1
             self.lcdSlots.display(self.slot)
-        self.getScheduler()
+        self.getReservations()
 
     def updateScheduler(self):
         self.getSchedule()
@@ -240,17 +241,18 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             print(self.selectedSlot)
             print(int(self.selectedSlot)+int(self.lcdSlots.intValue()-1))
             pix = qrcode.make(
-                '{"Reservation": {"TimeSlotFrom": %s, "TimeSlotTo": %s, "Date": "%s-%s-%s", "Room": "%s"}}' % (self.selectedSlot,
+                '{"reservation": {"timeslotfrom": %s, "timeslotto": %s, "date": "%s-%s-%s", "room": "%s"}}' % (self.selectedSlot,
                                                                                                              int(self.selectedSlot)+int(self.lcdSlots.intValue()-1),
-                                                                                                             self.lcdDay.intValue(),self.lcdMonth.intValue(),self.year,self.room))
+                                                                                                               self.lcdDay.intValue(),self.lcdMonth.intValue(),self.year,self.room))
             pix.save(self.filename)
             print("qr generated")
         elif type == 1:
-            pix2 = qrcode.make('{"Defunct": {"Type": %s, "Room": %s}}' % (self.defectTypeBox.currentText(), self.room))
+            pix2 = qrcode.make('{"defunct": {"type": "%s", "room": "%s"}}' % (self.defectTypeBox.currentText(), self.room))
             pix2.save(self.filename)
             print("qr generated")
 
     def getDefunctTypes(self):
+        self.defectTypeBox.addItem("notype")
         self.defectTypeBox.addItem("type 1")
         self.defectTypeBox.addItem("type 2")
         self.defectTypeBox.addItem("type 3")
@@ -280,13 +282,13 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                 pulse_duration = pulse_end_time - pulse_start_time
                 distance = round(pulse_duration * 17150, 2)
                 self.lblCapacity_home.setText("Distance:"+str(distance)+"cm")
-                if distance<80 and self.stackedWidget.currentIndex() is 0:
+                if distance<40 and self.stackedWidget.currentIndex() is 0:
                     self.stackedWidget.setCurrentIndex(1)
                     self.start = time.time()
-                elif distance<200 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
+                elif distance<100 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
-                    time.sleep(0.5)
+                    time.sleep(0.8)
                 if (time.time())-self.start > 10 and distance > 80 and self.stackedWidget.currentIndex() is not 4:
                     self.stackedWidget.setCurrentIndex(0)
         finally:
@@ -307,22 +309,42 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
 #----json parse and table fill----
 
-    def getScheduler(self):
-        date = self.day + self.month  #TODO format correctly
-        self.getData(date,"http://markb.pythonanywhere.com/reservation",2)
+    def getReservations(self):
+        date = self.day + self.month
+        self.getData(date, "http://markb.pythonanywhere.com/reservation", 2)
 
     def getSchedule(self):
         date = self.calendarWidget.selectedDate()
-        self.getData(date,"http://markb.pythonanywhere.com/reservation",0)
+        print(date.day())
+        print(date.month())
+        print(date.year())
+        week = datetime.date(date.year(),date.month(),date.day()).isocalendar()[1]
+        self.getData(week, "http://markb.pythonanywhere.com/bookingbyroom/", 0)
+
+    def getData(self, week, url, type):
+        req = urllib.request.Request(url)
+        req.add_header('Content-Type','application/json; charset=utf-8')
+        if type == 0:
+            body = '"room":"%s","weeknummer":"%s"' % (self.room,week)
+        elif type == 1:
+            body = '"room":"%s"' % (self.room)
+        elif type == 2:
+            body = '"room":"%s","weeknummer":"%s"' % (self.room, week)
+        jsonbody = json.dumps(body)
+        jsonasbyte = jsonbody.encode('utf-8')
+        req.add_header('Content-Length',len(jsonasbyte))
+        print(jsonasbyte)
+        try:
+            contents = urllib.request.urlopen(req,jsonasbyte).read()
+            data = json.loads(contents.decode('utf-8'))
+            print(json.dumps(data, indent=4, sort_keys=True))
+            self.parseData(data,type)
+        except:
+            self.parseData({},type=10)
 
     def getDefects(self):
-        self.getData(datetime.datetime.now(),"http://markb.pythonanywhere.com/reservation",1)
+        self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1)
 
-    def getData(self,date,url,type):
-        contents = urllib.request.urlopen(url).read()
-        data = json.loads(contents.decode('utf-8'))
-        print(json.dumps(data, indent=4, sort_keys=True))
-        self.parseData(data,type)
 
     def fillEmptyList(self):
         for i in range(15):
@@ -340,9 +362,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             for i in data:
                 self.enterReservation(int(i["timeslot_from"]), int(i["timeslot_to"])," %s %s %s %s %s"%(str(i["time_from"]),str(i["time_to"]),str(i["room"]),str(i["lesson"]),str(i["username"])))
         elif type == 1:
-            self.updateDefects()
+            print("1")
+            #self.updateDefects()
         elif type == 2:
-            self.updateScheduler()
+            print("2")
+            #self.updateScheduler()
+        elif type == 10:
+            self.enterReservation(0,10,"error has occured")
+            self.errorScheduleEvent("type %s" % type)
 
     def updateDefects(self):
         print("Waiting for implementation somewhere else")  # waiting for defects to be added to api calls
@@ -354,7 +381,11 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         model = QStringListModel(self.jsonData)
         self.listView.setModel(model)
 
-#-----upon close event
+#-----events
+    def errorScheduleEvent(self, string):
+        reply = QMessageBox.question(self, 'Message',
+                                     "An error has occurred: %s" % string, QMessageBox.Ok)
+
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message',
                                      "Are you sure to quit?", QMessageBox.Yes |
