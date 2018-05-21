@@ -177,9 +177,9 @@ class Ui_MainWindow(object):
         self.generateDefect = QtWidgets.QPushButton(self.defect)
         self.generateDefect.setGeometry(QtCore.QRect(730, 720, 491, 341))
         self.generateDefect.setObjectName("generateDefect")
-        self.listView_2 = QtWidgets.QListView(self.defect)
-        self.listView_2.setGeometry(QtCore.QRect(0, 20, 701, 1041))
-        self.listView_2.setObjectName("listView_2")
+        self.defectListView = QtWidgets.QListView(self.defect)
+        self.defectListView.setGeometry(QtCore.QRect(0, 20, 701, 1041))
+        self.defectListView.setObjectName("defectList")
         self.stackedWidget.addWidget(self.defect)
         MainWindow.setCentralWidget(self.centralwidget)
 

@@ -1,3 +1,9 @@
+import pip
+try:
+    import requests
+except ImportError:
+    pip.main(['install', 'requests'])
+    import requests
 from designer import main
 from PyQt5.QtCore import Qt, QStringListModel
 from PyQt5.QtGui import QPixmap
@@ -16,7 +22,8 @@ import savestuff
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
-        self.jsonData = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+        self.timeTableData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        self.defectTableData = []
         self.dir = os.path.dirname(__file__)
         self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
         self.filename2 = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"
@@ -40,8 +47,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.fillEmptyList()
         self.getSchedule()
-        self.getTimeTable()
-        self.getDefects()
+        self.setTimeTable()
 
 
         now = datetime.datetime.now()
@@ -49,7 +55,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.month = now.month
         self.year = now.year
         self.slot = 1
-        self.selectedSlot = 0
+        self.selectedSlot = 1
         self.maxSlots = 15
         self.lcdDay.display(self.day)
         self.lcdMonth.display(self.month)
@@ -120,6 +126,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         if sender is self.scheduleBtn:
             self.stackedWidget.setCurrentIndex(2)
         elif sender is self.defectsBtn:
+            self.getDefects()
+            self.setDefectTable()
             self.stackedWidget.setCurrentIndex(3)
         elif sender is self.defectBack:
             self.defectQr.clear()
@@ -311,59 +319,73 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def getReservations(self):
         date = self.day + self.month
-        self.getData(date, "http://markb.pythonanywhere.com/reservation", 2)
+        self.getData(date, "http://markb.pythonanywhere.com/reservation/", 2)
 
     def getSchedule(self):
+        self.fillEmptyList()
         date = self.calendarWidget.selectedDate()
-        print(date.day())
-        print(date.month())
-        print(date.year())
+        print("get schedule, calendar clicked")
         week = datetime.date(date.year(),date.month(),date.day()).isocalendar()[1]
-        self.getData(week, "http://markb.pythonanywhere.com/bookingbyroom/", 0)
+        self.getData(week, "http://markb.pythonanywhere.com/bookingbyroom/", 0,date)
+        self.setTimeTable()
 
-    def getData(self, week, url, type):
-        req = urllib.request.Request(url)
-        req.add_header('Content-Type','application/json; charset=utf-8')
+    def getData(self, week, url, type, date):
+        body = None
         if type == 0:
-            body = '"room":"%s","weeknummer":"%s"' % (self.room,week)
+            body = {"room":self.room,"weeknummer": week}
         elif type == 1:
-            body = '"room":"%s"' % (self.room)
+            body = {"room":self.room}
         elif type == 2:
-            body = '"room":"%s","weeknummer":"%s"' % (self.room, week)
-        jsonbody = json.dumps(body)
-        jsonasbyte = jsonbody.encode('utf-8')
-        req.add_header('Content-Length',len(jsonasbyte))
-        print(jsonasbyte)
+            body = {"room":self.room,"weeknummer":week}
         try:
-            contents = urllib.request.urlopen(req,jsonasbyte).read()
-            data = json.loads(contents.decode('utf-8'))
+            r = requests.post(url, json=body)
+            print('print response')
+            text = r.content
+            print(text)
+            print("\n###########\n")
+            data = json.loads(text)
             print(json.dumps(data, indent=4, sort_keys=True))
-            self.parseData(data,type)
+            self.parseData(data,type,date)
         except:
             self.parseData({},type=10)
 
     def getDefects(self):
-        self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1)
+        self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1,datetime)
 
 
     def fillEmptyList(self):
         for i in range(15):
-            self.jsonData[i] = ("%d Empty"%(i+1))
+            self.timeTableData[i] = ("%d Empty" % (i + 1))
             print(i+1)
 
     def enterReservation(self, timeFrom, timeTo, string):
         time=timeFrom-1
         for i in range(time,timeTo):
-            self.jsonData[time] = (str(time+1)+string)
+            self.timeTableData[time] = (str(time + 1) + string)
             time += 1
 
-    def parseData(self, data,type):
+    def enterDefects(self, description, handled, type):
+        self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
+
+    def parseData(self, data, type, date):
         if type == 0:
             for i in data:
-                self.enterReservation(int(i["timeslot_from"]), int(i["timeslot_to"])," %s %s %s %s %s"%(str(i["time_from"]),str(i["time_to"]),str(i["room"]),str(i["lesson"]),str(i["username"])))
+                print("printing day:")
+                print(i["fields"]["date"][3:5] +" or "+ i["fields"]["date"][-2:]+" or "+
+                        i["fields"]["date"][-1:] +" or "+ i["fields"]["date"][4:5])
+                print(str(date.day()))
+                print(i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or
+                        i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()))
+                                                                                                                                #TODO change if statement once db is fixed and only uses 1 date format
+                if i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or \
+                        i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()):
+                    self.enterReservation(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
+                                      " %s %s %s %s %s"%(str(i["fields"]["timefrom"]),str(i["fields"]["timeto"]),
+                                                         str(i["fields"]["room"]),str(i["fields"]["lesson"]),
+                                                         str(i["fields"]["username"])))
         elif type == 1:
-            print("1")
-            #self.updateDefects()
+            for i in data:
+                self.enterDefects(i["fields"]["description"],i["fields"]["handled"],i["fields"]["type"])
         elif type == 2:
             print("2")
             #self.updateScheduler()
@@ -371,15 +393,18 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.enterReservation(0,10,"error has occured")
             self.errorScheduleEvent("type %s" % type)
 
-    def updateDefects(self):
-        print("Waiting for implementation somewhere else")  # waiting for defects to be added to api calls
 
     def updateScheduler(self):
         print("Waiting for implementation somewhere else")  # waiting for api to give back schedule for selected day
 
-    def getTimeTable(self):
-        model = QStringListModel(self.jsonData)
+    def setTimeTable(self):
+        model = QStringListModel(self.timeTableData)
         self.listView.setModel(model)
+
+    def setDefectTable(self):
+        model = QStringListModel(self.defectTableData)
+        print(model)
+        self.defectListView.setModel(model)
 
 #-----events
     def errorScheduleEvent(self, string):
