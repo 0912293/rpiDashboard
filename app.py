@@ -25,6 +25,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.timeTableData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         self.defectTableData = []
         self.scheduleTableData = [0]
+        self.radioButtonData = []
+        self.timeSlotData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        self.taken = []
+        self.timeSlotBackUp = ["Timeslot 1 08:30 09:20", "Timeslot 2 09:20 10:10", "Timeslot 3 10:30 11:20",
+                             "Timeslot 4 11:20 12:10", "Timeslot 5 12:10 13:00", "Timeslot 6 13:00 13:50",
+                             "Timeslot 7 13:50 14:40", "Timeslot 8 15:00 15:50", "Timeslot 9 15:50 16:40",
+                             "Timeslot 10 17:00 17:50", "Timeslot 11 17:50 18:40", "Timeslot 12 18:40 19:30",
+                             "Timeslot 13 19:30 20:20", "Timeslot 14 20:20 21:10", "Timeslot 15 21:10 22:00"]
 
         self.dir = os.path.dirname(__file__)
         self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
@@ -157,22 +165,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
     def scheduleButtons(self):
         sender = self.sender()
         self.resetTime()
-        # if sender is self.dayLeft:
-        #     if self.day >1:
-        #         self.day -= 1
-        #     self.lcdDay.display(self.day)
-        # elif sender is self.dayRight:
-        #     if self.day <31:
-        #         self.day += 1
-        #     self.lcdDay.display(self.day)
-        # elif sender is self.monthLeft:
-        #     if self.month >1:
-        #         self.month -= 1
-        #     self.lcdMonth.display(self.month)
-        # elif sender is self.monthRight:
-        #     if self.month <12:
-        #         self.month += 1
-        #     self.lcdMonth.display(self.month)
         if sender is self.slotLeft:
             if self.slot >1:
                 self.slot -= 1
@@ -235,6 +227,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         elif sender is self.slot15:
             self.selectedSlot = 15
             self.maxSlots = 1
+        self.checkDisabledSlots()
         self.maxslots()
 
     def wakeup(self):
@@ -242,23 +235,41 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)
 
     def maxslots(self):
+        b = False
+        c = []
+        for i in self.taken:
+            if i > self.selectedSlot:
+                c.append(i)
+                b = True
+        if b:
+            self.maxSlots = min(c) - self.selectedSlot
+            self.slot = 1
         if self.slot>self.maxSlots:
             self.slot=self.maxSlots
         self.lcdSlots.display(self.slot)
 
+    def checkDisabledSlots(self):
+        q=1
+        self.taken = []
+        for i in self.timeSlotData:
+            if i != q:
+                self.taken.append(q)
+            q += 1
+
     def generateQr(self,type):
         print(self.filename+'qr/qr.png')
         if type == 0:
-            # print(self.lcdDay.intValue())
-            # print(self.lcdMonth.intValue())
-            print(self.year)
+            date = self.calendarWidgetSchedule.selectedDate()
+            print(date.day())
+            print(date.month())
+            print(date.year())
             print(self.lcdSlots.intValue())
             print(self.selectedSlot)
             print(int(self.selectedSlot)+int(self.lcdSlots.intValue()-1))
             pix = qrcode.make(
                 '{"reservation": {"timeslotfrom": %s, "timeslotto": %s, "date": "%s-%s-%s", "room": "%s"}}' % (self.selectedSlot,
                                                                                                              int(self.selectedSlot)+int(self.lcdSlots.intValue()-1),
-                                                                                                               "day","month",self.year,self.room))
+                                                                                                               date.day(),date.month(),date.year(),self.room))
             pix.save(self.filename)
             print("qr generated")
         elif type == 1:
@@ -325,6 +336,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 #----json parse and table fill----
 
     def getReservations(self):
+        self.fillRadioButtonList()
         date = self.calendarWidgetSchedule.selectedDate()
         print('------------------------------------------------')
         print(date)
@@ -347,11 +359,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
     def getData(self, week, url, type, date):
         body = None
         if type == 0:
-            body = {"room":self.room,"weeknummer": week}
+            body = {"room":self.room, "weeknummer": week}
+            print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\calendar")
         elif type == 1:
             body = {"room":self.room}
+            print("~~~~~~~~~~~~~~~~~~Defunct")
         elif type == 2:
-            body = {"room":self.room,"weeknummer":week}
+            body = {"room":self.room, "weeknummer": week}
+            print("/////////////////////////Schedule")
         try:
             r = requests.post(url, json=body)
             print('print response')
@@ -365,13 +380,25 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.error(type)
 
     def getDefects(self):
-        self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1,datetime)
+        self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1, datetime)
 
 
     def fillEmptyList(self):
         for i in range(15):
             self.timeTableData[i] = ("%d Empty" % (i + 1))
             print(i+1)
+
+    def fillRadioButtonList(self):
+        self.radioButtonData = self.timeSlotBackUp
+        print("RadioButtons")
+        q = 0
+        for i in self.radioButtonGroup.buttons():
+            self.timeSlotData[q] = q+1
+            print(self.radioButtonData[q])
+            i.setText(self.radioButtonData[q])
+            i.setEnabled(True)
+            q += 1
+        print("xxxxxxxx")
 
     def enterReservation(self, timeFrom, timeTo, string):
         time=timeFrom-1
@@ -385,8 +412,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
     def enterScheduler(self, timeFrom, timeTo, string):
         time=timeFrom-1
         for i in range(time,timeTo):
-            self.scheduleTableData[time] = (string,timeFrom,timeTo)
+            self.timeSlotData[time] = (str(time + 1) + string) #(string,timeFrom,timeTo)
             time += 1
+
+
 
     def parseData(self, data, type, date):
         if type == 0:
@@ -408,8 +437,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             for i in data:
                 self.enterDefects(i["fields"]["description"],i["fields"]["handled"],i["fields"]["type"])
         elif type == 2:
-            for i in data:
-                                                                                                                                #TODO clean this shit up
+            for i in data:                         #TODO clean this shit up \/
                 if i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or \
                         i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()):
                     self.enterScheduler(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
@@ -422,9 +450,12 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def setSchedulerTable(self):
         print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-        self.slot9.setText(str(self.scheduleTableData[0][0]))
-        # self.slot9.setText("test")
-        self.slot9.setEnabled(False)
+        j = 0
+        for i in self.radioButtonGroup.buttons():
+            if self.timeSlotData[j] != j + 1:
+                i.setText(self.timeSlotData[j])
+                i.setEnabled(False)
+            j += 1
 
     def setTimeTable(self):
         model = QStringListModel(self.timeTableData)
@@ -482,6 +513,7 @@ def main():
     main = MainUi()
     main.show()
     app.exec_()
+
 
 
 if __name__ == '__main__':
