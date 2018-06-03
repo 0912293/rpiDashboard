@@ -356,28 +356,28 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
 
 
-    def getData(self, week, url, type, date):
-        body = None
-        if type == 0:
-            body = {"room":self.room, "weeknummer": week}
-            print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\calendar")
-        elif type == 1:
-            body = {"room":self.room}
-            print("~~~~~~~~~~~~~~~~~~Defunct")
-        elif type == 2:
-            body = {"room":self.room, "weeknummer": week}
-            print("/////////////////////////Schedule")
-        try:
-            r = requests.post(url, json=body)
-            print('print response')
-            text = r.content
-            print(text)
-            print("\n###########\n")
-            data = json.loads(text)
-            print(json.dumps(data, indent=4, sort_keys=True))
-            self.parseData(data,type,date)
-        except:
-            self.error(type)
+    # def getData(self, week, url, type, date):
+    #     body = None
+    #     if type == 0:
+    #         body = {"room":self.room, "weeknummer": week}
+    #         print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\calendar")
+    #     elif type == 1:
+    #         body = {"room":self.room}
+    #         print("~~~~~~~~~~~~~~~~~~Defunct")
+    #     elif type == 2:
+    #         body = {"room":self.room, "weeknummer": week}
+    #         print("/////////////////////////Schedule")
+    #     try:
+    #         r = requests.post(url, json=body)
+    #         print('print response')
+    #         text = r.content
+    #         print(text)
+    #         print("\n###########\n")
+    #         data = json.loads(text)
+    #         print(json.dumps(data, indent=4, sort_keys=True))
+    #         self.parseData(data,type,date)
+    #     except:
+    #         self.error(type)
 
     def getDefects(self):
         self.getData(datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/", 1, datetime)
@@ -400,50 +400,42 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             q += 1
         print("xxxxxxxx")
 
-    def enterReservation(self, timeFrom, timeTo, string):
-        time=timeFrom-1
-        for i in range(time,timeTo):
-            self.timeTableData[time] = (str(time + 1) + string)
-            time += 1
+    # def enterReservation(self, timeFrom, timeTo, string):
+    #     time=timeFrom-1
+    #     for i in range(time,timeTo):
+    #         self.timeTableData[time] = (str(time + 1) + string)
+    #         time += 1
+    #
+    # def enterDefects(self, description, handled, type):
+    #     self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
+    #
+    # def enterScheduler(self, timeFrom, timeTo, string):
+    #     time=timeFrom-1
+    #     for i in range(time,timeTo):
+    #         self.timeSlotData[time] = (str(time + 1) + string) #(string,timeFrom,timeTo)
+    #         time += 1
 
-    def enterDefects(self, description, handled, type):
-        self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
-
-    def enterScheduler(self, timeFrom, timeTo, string):
-        time=timeFrom-1
-        for i in range(time,timeTo):
-            self.timeSlotData[time] = (str(time + 1) + string) #(string,timeFrom,timeTo)
-            time += 1
-
-
-
-    def parseData(self, data, type, date):
-        if type == 0:
-            for i in data:
-                print("printing day:")
-                print(i["fields"]["date"][3:5] +" or "+ i["fields"]["date"][-2:]+" or "+
-                        i["fields"]["date"][-1:] +" or "+ i["fields"]["date"][4:5])
-                print(str(date.day()))
-                print(i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or
-                        i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()))
-                                                                                                                                #TODO change if statement once db is fixed and only uses 1 date format
-                if i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or \
-                        i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()):
-                    self.enterReservation(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
-                                      " %s %s %s %s %s"%(str(i["fields"]["timefrom"]),str(i["fields"]["timeto"]),
-                                                         str(i["fields"]["room"]),str(i["fields"]["lesson"]),
-                                                         str(i["fields"]["username"])))
-        elif type == 1:
-            for i in data:
-                self.enterDefects(i["fields"]["description"],i["fields"]["handled"],i["fields"]["type"])
-        elif type == 2:
-            for i in data:                         #TODO clean this shit up \/
-                if i["fields"]["date"][3:5] == str(date.day()) or i["fields"]["date"][-2:] == str(date.day()) or \
-                        i["fields"]["date"][-1:] == str(date.day()) or i["fields"]["date"][4:5] == str(date.day()):
-                    self.enterScheduler(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
-                                      " %s %s %s %s %s"%(str(i["fields"]["timefrom"]),str(i["fields"]["timeto"]),
-                                                         str(i["fields"]["room"]),str(i["fields"]["lesson"]),
-                                                         str(i["fields"]["username"])))
+    # def parseData(self, data, type, date):
+    #     if type == 0:
+    #         for i in data:
+    #             print("printing day:")
+    #             print(str(date.day()))
+    #             print(i["fields"]["date"][0:2] == str(date.day()))
+    #             if i["fields"]["date"][0:2] == str(date.day()):
+    #                 self.enterReservation(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
+    #                                   " %s %s %s %s %s"%(str(i["fields"]["timefrom"]),str(i["fields"]["timeto"]),
+    #                                                      str(i["fields"]["room"]),str(i["fields"]["lesson"]),
+    #                                                      str(i["fields"]["username"])))
+    #     elif type == 1:
+    #         for i in data:
+    #             self.enterDefects(i["fields"]["description"],i["fields"]["handled"],i["fields"]["type"])
+    #     elif type == 2:
+    #         for i in data:
+    #             if i["fields"]["date"][0:2] == str(date.day()):
+    #                 self.enterScheduler(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
+    #                                   " %s %s %s %s %s"%(str(i["fields"]["timefrom"]),str(i["fields"]["timeto"]),
+    #                                                      str(i["fields"]["room"]),str(i["fields"]["lesson"]),
+    #                                                      str(i["fields"]["username"])))
     def error(self, string):
         self.enterReservation(0,10,"error has occured")
         self.errorScheduleEvent("type %s" % string)
