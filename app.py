@@ -1,4 +1,5 @@
 import pip
+
 try:
     import requests
 except ImportError:
@@ -9,10 +10,7 @@ from PyQt5.QtCore import Qt, QStringListModel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from datetime import time
-import urllib.request
-import json
-import qrcode
-import sys,os
+import sys, os
 import datetime
 import time
 import RPi.GPIO as GPIO
@@ -20,10 +18,10 @@ import threading
 from time import gmtime, strftime
 import savestuff
 import qrCode
-import sleepTimer
 from defects import defects
 from reservations import reservations
 from scheduler import Scheduler
+
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
@@ -36,14 +34,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.dir = os.path.dirname(__file__)
         self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
         self.filename2 = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"
-        #self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
-        #self.filename2 = "/home/pi/RaspberryPi/setup.json"
+        # self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
+        # self.filename2 = "/home/pi/RaspberryPi/setup.json"
 
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.initUI()
 
-        if os.path.exists(self.filename2) is False:     # ??? not sure why savestuff.check doesnt work
+        if os.path.exists(self.filename2) is False:  # ??? not sure why savestuff.check doesnt work
             self.stackedWidget.setCurrentIndex(4)
             savestuff.create()
             self.savebtn.clicked.connect(self.savePress)
@@ -123,17 +121,21 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.wakeButton.clicked.connect(self.wakeup)
 
     def getReservation(self):
-        self.reservation.getReservations(self.room, self.calendarWidget.selectedDate())
+        try:
+            self.reservation.getReservations(self.room, self.calendarWidget.selectedDate())
+        except:
+            self.errorScheduleEvent("Failed to retrieve reservations")
         self.setTimeTable()
 
     def getSchedule(self):
-        self.scheduler.getSchedule(self.room, self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
+        try:
+            self.scheduler.getSchedule(self.room, self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
+        except:
+            self.errorScheduleEvent("Failed to retrieve bookings")
         self.setSchedulerTable()
-        self.setMax()
-
-    def setMax(self):
-        self.checkDisabledSlots()
         self.maxslots()
+        if self.slot > self.maxSlots:
+            self.slot = self.maxSlots
 
     def menuButtons(self):
         sender = self.sender()
@@ -154,18 +156,19 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             qrCode.generateDefectQr(self.filename, self.defectTypeBox, self.room)
             pixmap = QPixmap(self.filename)
             print(self.pixmap)
-            self.defectQr.setPixmap(pixmap.scaled(250,250))
+            self.defectQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
         elif sender is self.generate:
             qrCode.generateBookingQr(self.filename, self.calendarWidgetSchedule.selectedDate(), self.selectedSlot,
                                      self.lcdSlots.intValue(), self.room)
             pixmap = QPixmap(self.filename)
-            self.scheduleQr.setPixmap(pixmap.scaled(250,250))
+            self.scheduleQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
 
     def scheduleButtons(self):
         sender = self.sender()
         self.resetTime()
+        self.maxslots()
         if sender is self.slotLeft:
             if self.slot > 1:
                 self.slot -= 1
@@ -173,7 +176,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         elif sender is self.slotRight:
             if self.slot < self.maxSlots:
                 self.slot += 1
+            else:
+                self.slot = self.maxSlots
             self.lcdSlots.display(self.slot)
+
 
     def radioCheck(self):
         sender = self.sender()
@@ -224,7 +230,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         elif sender is self.slot15:
             self.selectedSlot = 15
             self.maxSlots = 1
-        self.setMax()
+        self.maxslots()
 
     def wakeup(self):
         self.resetTime()
@@ -233,19 +239,18 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
     def maxslots(self):
         b = False
         c = []
+        self.checkDisabledSlots()
         for i in self.taken:
             if i > self.selectedSlot:
                 c.append(i)
                 b = True
         if b:
             self.maxSlots = min(c) - self.selectedSlot
-            self.slot = 1
         if self.slot > self.maxSlots:
             self.slot = self.maxSlots
-        self.lcdSlots.display(self.slot)
 
     def checkDisabledSlots(self):
-        q=1
+        q = 1
         self.taken = []
         for i in self.scheduler.getTimeSlotData():
             if i != q:
@@ -276,15 +281,15 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                     pulse_end_time = time.time()
                 pulse_duration = pulse_end_time - pulse_start_time
                 distance = round(pulse_duration * 17150, 2)
-                self.lblCapacity_home.setText("Distance:"+str(distance)+"cm")
-                if distance<40 and self.stackedWidget.currentIndex() is 0:
+                self.lblCapacity_home.setText("Distance:" + str(distance) + "cm")
+                if distance < 40 and self.stackedWidget.currentIndex() is 0:
                     self.stackedWidget.setCurrentIndex(1)
                     self.start = time.time()
-                elif distance<100 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
+                elif distance < 100 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
                     time.sleep(0.8)
-                if (time.time())-self.start > 10 and distance > 80 and self.stackedWidget.currentIndex() is not 4:
+                if (time.time()) - self.start > 10 and distance > 80 and self.stackedWidget.currentIndex() is not 4:
                     self.stackedWidget.setCurrentIndex(0)
         finally:
             print('cleaning')
@@ -302,7 +307,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         savestuff.write(str(self.roomNumTbox.text()))
         self.stackedWidget.setCurrentIndex(0)
 
-# ----json parse and table fill----
+    # ----json parse and table fill----
 
     def setSchedulerTable(self):
         print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
@@ -323,7 +328,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         print(model)
         self.defectListView.setModel(model)
 
-# -----events
+    # -----events
     def errorScheduleEvent(self, string):
         reply = QMessageBox.question(self, 'Message',
                                      "An error has occurred: %s" % string, QMessageBox.Ok)
@@ -344,7 +349,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         if reply == QMessageBox.Yes:
             QApplication.instance().quit()
 
-# ----debug stuff---Remove later------
+    # ----debug stuff---Remove later------
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Escape:
             self.closeEvent()

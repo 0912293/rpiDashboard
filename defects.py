@@ -10,7 +10,7 @@ class defects():
         self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
 
     def getDefects(self,room):
-        self.__getData(room, datetime.datetime.now(), "http://markb.pythonanywhere.com/roomdefuncts/")
+        self.__getData(room, "http://markb.pythonanywhere.com/roomdefuncts/")
 
     def getDefunctTypes(self,defectTypeBox):
         defectTypeBox.addItem("notype")
@@ -18,10 +18,10 @@ class defects():
         defectTypeBox.addItem("type 2")
         defectTypeBox.addItem("type 3")
 
-    def __getData(self,room, date, url):
+    def __getData(self,room, url):
         body = {"room": room}
         print("~~~~~~~~~~~~~~~~~~Defunct")
-        data = apiConnect.getData(body, url, date,1)
+        data = apiConnect.getData(body, url)
         self.__parseData(data)
 
     def __parseData(self,data):

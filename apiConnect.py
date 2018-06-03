@@ -4,19 +4,15 @@ import reservations
 import scheduler
 import defects
 
-def getData(body, url, date, type):
-    try:
-        r = requests.post(url, json=body)
-        print('print response')
-        text = r.content
-        print(text)
-        print("\n###########\n")
-        data = json.loads(text)
-        print(json.dumps(data, indent=4, sort_keys=True))
-        return data   #parseData(data,type,date
-    except:
-        print("ples halp")
-        # self.error(type) #TODO create error handling class
+def getData(body, url):
+    r = requests.post(url, json=body)
+    print('print response')
+    text = r.content
+    print(text)
+    print("\n###########\n")
+    data = json.loads(text)
+    print(json.dumps(data, indent=4, sort_keys=True))
+    return data
 
 def parseData(data, type, date):
     if type == 0:

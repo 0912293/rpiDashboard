@@ -42,7 +42,7 @@ class Scheduler:
     def __getData(self, room, week, date, url):
         body = {"room": room, "weeknummer": week}
         print("/////////////////////////Schedule")
-        data = apiConnect.getData(body, url, date, 2)
+        data = apiConnect.getData(body, url)
         self.__parseData(data,date)
 
     def __parseData(self, data, date):
