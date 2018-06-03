@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd8122e6-2294-486b-b4f3-8257ff76dd0b" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/apiConnect.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/defects.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/qrCode.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/reservations.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/scheduler.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/sleepTimer.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change beforePath="$PROJECT_DIR$/setup.json" afterPath="$PROJECT_DIR$/setup.json" />
     </list>
     <ignored path=".idea/modules.xml" />
     <ignored path=".idea/misc.xml" />
@@ -32,7 +37,7 @@
     <SUITE FILE_PATH="coverage/Raspberry_pi$main.coverage" NAME="main Coverage Results" MODIFIED="1522051730823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$home.coverage" NAME="home Coverage Results" MODIFIED="1522312368301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$PiTest.coverage" NAME="PiTest Coverage Results" MODIFIED="1521719621390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$app.coverage" NAME="app Coverage Results" MODIFIED="1528029385269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$app.coverage" NAME="app Coverage Results" MODIFIED="1528059518002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$ui.coverage" NAME="ui Coverage Results" MODIFIED="1521719638562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$scheduleScreen.coverage" NAME="scheduleScreen Coverage Results" MODIFIED="1521805909704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/designer" />
   </component>
@@ -41,40 +46,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
-              <caret line="391" column="30" lean-forward="false" selection-start-line="391" selection-start-column="30" selection-end-line="391" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="defects.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/defects.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apiConnect.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apiConnect.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="37" column="33" lean-forward="false" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reservations.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reservations.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="2261">
+              <caret line="133" column="11" lean-forward="true" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -83,8 +56,32 @@
       <file leaf-file-name="scheduler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scheduler.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="defects.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/defects.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -93,18 +90,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/designer/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="120" column="62" lean-forward="false" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setup.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+            <state relative-caret-position="311">
+              <caret line="109" column="24" lean-forward="true" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -121,25 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>30p</find>
-      <find>setupUi</find>
-      <find>pushbutton</find>
-      <find>pushbutton_2</find>
-      <find>label_2</find>
-      <find>QWebEngineView</find>
-      <find>stackedWidget</find>
-      <find>filename</find>
-      <find>setCurrentIndex</find>
-      <find>getData</find>
-      <find>WD</find>
-      <find>listview</find>
-      <find>listView</find>
-      <find>lcdday</find>
-      <find>calendarwidget</find>
-      <find>enterscheduler</find>
-      <find>parseData</find>
-      <find>data[</find>
-      <find>fillem</find>
       <find>settext</find>
       <find>data</find>
       <find>slot</find>
@@ -150,6 +118,26 @@
       <find>maxslots</find>
       <find>taken</find>
       <find>calenda</find>
+      <find>enterd</find>
+      <find>getdata</find>
+      <find>defects</find>
+      <find>setschedul</find>
+      <find>asd</find>
+      <find>defectlist</find>
+      <find>defectList</find>
+      <find>defect</find>
+      <find>entersc</find>
+      <find>selecteddate</find>
+      <find>fillempty</find>
+      <find>get</find>
+      <find>reservations</find>
+      <find>getReservations</find>
+      <find>getschedule</find>
+      <find>getreservations</find>
+      <find>init</find>
+      <find>getsc</find>
+      <find>getrese</find>
+      <find>timeSlotData</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,11 +165,14 @@
         <option value="$PROJECT_DIR$/tests/unittest.py" />
         <option value="$PROJECT_DIR$/designer/main.py" />
         <option value="$PROJECT_DIR$/setup.json" />
-        <option value="$PROJECT_DIR$/apiConnect.py" />
-        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/sleepTimer.py" />
+        <option value="$PROJECT_DIR$/qrCode.py" />
+        <option value="$PROJECT_DIR$/scheduleRadio.py" />
         <option value="$PROJECT_DIR$/reservations.py" />
-        <option value="$PROJECT_DIR$/scheduler.py" />
         <option value="$PROJECT_DIR$/defects.py" />
+        <option value="$PROJECT_DIR$/apiConnect.py" />
+        <option value="$PROJECT_DIR$/scheduler.py" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
@@ -192,8 +183,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-81" />
-    <option name="y" value="-21" />
+    <option name="x" value="36" />
+    <option name="y" value="-13" />
     <option name="width" value="1813" />
     <option name="height" value="1096" />
   </component>
@@ -668,7 +659,14 @@
       <option name="project" value="LOCAL" />
       <updated>1527980287094</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="#Doing&#10;Cleaning up code and commenting everything&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Testing&#10;-unit tests&#10;-integration test">
+      <created>1528042977230</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1528042977230</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -676,24 +674,25 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.31739572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1668" y="18" width="1459" height="667" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.31739572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="-1588" y="20" width="860" height="646" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09322917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.134375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27670395" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27670395" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -718,11 +717,12 @@
     <MESSAGE value="#Added&#10;Home screen:&#10;-calendar works now and you can select dates and it will retrieve the scheduled information from the api&#10;&#10;Defects screen:&#10;-loads defects for the current room upon loading the defects screen.&#10;-added a drop down box for different types(defaults to notype)&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;&#10;Schedule screen:&#10;-Show current schedule and disable buttons for slots that are already taken&#10;&#10;Defects screen:&#10;-add defunct types" />
     <MESSAGE value="#working on &#10;Schedule screen:&#10;-Show current schedule and disable buttons for slots that are already taken&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Defects screen:&#10;-add defunct types" />
     <MESSAGE value="#Added&#10;Schedule:&#10;-Radiobuttons are now disabled when you depending on the selected days schedule&#10;-And slots etc also now respond to this&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
-    <option name="LAST_COMMIT_MESSAGE" value="#Added&#10;Schedule:&#10;-Radiobuttons are now disabled when you depending on the selected days schedule&#10;-And slots etc also now respond to this&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
+    <MESSAGE value="#Doing&#10;Cleaning up code and commenting everything&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
+    <option name="LAST_COMMIT_MESSAGE" value="#Doing&#10;Cleaning up code and commenting everything&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="52" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -743,11 +743,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/uiTest.py" />
-    <entry file="file://$PROJECT_DIR$/quickstart.py" />
-    <entry file="file://$PROJECT_DIR$/PiTest.py" />
-    <entry file="file://$PROJECT_DIR$/quickstart.py" />
-    <entry file="file://$PROJECT_DIR$/PiTest.py" />
     <entry file="file://$PROJECT_DIR$/quickstart.py" />
     <entry file="file://$PROJECT_DIR$/PiTest.py" />
     <entry file="file://$PROJECT_DIR$/quickstart.py" />
@@ -928,14 +923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/designer/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="120" column="62" lean-forward="false" selection-start-line="120" selection-start-column="62" selection-end-line="120" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/setup.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -944,44 +931,98 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/qrCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QStackedWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="174" column="14" lean-forward="true" selection-start-line="174" selection-start-column="14" selection-end-line="174" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scheduleRadio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apiConnect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="37" column="33" lean-forward="false" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
+        <state relative-caret-position="170">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="17" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reservations.py">
+    <entry file="file://$PROJECT_DIR$/sleepTimer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scheduler.py">
+    <entry file="file://$PROJECT_DIR$/reservations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+        <state relative-caret-position="476">
+          <caret line="28" column="49" lean-forward="true" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/designer/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="109" column="24" lean-forward="true" selection-start-line="109" selection-start-column="24" selection-end-line="109" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/defects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="527">
+          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="391" column="30" lean-forward="false" selection-start-line="391" selection-start-column="30" selection-end-line="391" selection-end-column="30" />
+        <state relative-caret-position="2261">
+          <caret line="133" column="11" lean-forward="true" selection-start-line="133" selection-start-column="11" selection-end-line="133" selection-end-column="11" />
           <folding />
         </state>
       </provider>
