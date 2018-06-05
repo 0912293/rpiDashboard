@@ -153,9 +153,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.scheduleQr.clear()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            qrCode.generateDefectQr(self.filename, self.defectTypeBox, self.room)
+            qrCode.generateDefectQr(self.filename, self.defectTypeBox.currentText(), self.room)
             pixmap = QPixmap(self.filename)
-            print(self.pixmap)
             self.defectQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
         elif sender is self.generate:
