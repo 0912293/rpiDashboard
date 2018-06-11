@@ -19,15 +19,20 @@ from time import gmtime, strftime
 import savestuff
 import qrCode
 from defects import defects
-from reservations import reservations
+from reservations import Reservations
 from scheduler import Scheduler
+from db import Db
 
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
         self.defects = defects()
-        self.reservation = reservations()
+        self.reservation = Reservations()
         self.scheduler = Scheduler()
+        self.db = Db()
+
+        if not savestuff.check('db.sqlite'):
+            self.db.create()
 
         self.taken = []
 
@@ -39,12 +44,12 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
-        self.initUI()
+        self.init_ui()
 
-        if os.path.exists(self.filename2) is False:  # ??? not sure why savestuff.check doesnt work
+        if not savestuff.check(self.filename2):
             self.stackedWidget.setCurrentIndex(4)
             savestuff.create()
-            self.savebtn.clicked.connect(self.savePress)
+            self.savebtn.clicked.connect(self.save_press)
             self.room = savestuff.read()
         else:
             self.room = savestuff.read()
@@ -55,9 +60,9 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                            self.slot8,
                            self.slot9, self.slot10, self.slot11, self.slot12, self.slot13, self.slot14, self.slot15]
 
-        self.getReservation()
+        self.get_reservation()
 
-        self.defects.getDefunctTypes(self.defectTypeBox)
+        self.defects.get_defunct_types(self.defectTypeBox)
 
         now = datetime.datetime.now()
         self.day = now.day
@@ -70,7 +75,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.passCounter = 0
 
-        thread = threading.Thread(target=self.distanceSensor, args=())
+        thread = threading.Thread(target=self.distance_sensor, args=())
         thread.daemon = True
         thread.start()
 
@@ -80,71 +85,73 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.start = 0
 
-    def initUI(self):
+    def init_ui(self):
         QMainWindow.showFullScreen(self)
         self.scheduleBtn.setToolTip("button 1")
         self.defectsBtn.setToolTip("button 2")
-        self.defectsBtn.clicked.connect(self.menuButtons)
-        self.defectBack.clicked.connect(self.menuButtons)
-        self.generateDefect.clicked.connect(self.menuButtons)
+        self.defectsBtn.clicked.connect(self.menu_buttons)
+        self.defectBack.clicked.connect(self.menu_buttons)
+        self.generateDefect.clicked.connect(self.menu_buttons)
         self.lblCapacity_home.setToolTip("Label 1")
         self.lblTemperature_home.setToolTip("Label 2")
-        self.scheduleBtn.clicked.connect(self.menuButtons)
-        self.scheduleBack.clicked.connect(self.menuButtons)
-        self.generate.clicked.connect(self.menuButtons)
+        self.scheduleBtn.clicked.connect(self.menu_buttons)
+        self.scheduleBack.clicked.connect(self.menu_buttons)
+        self.generate.clicked.connect(self.menu_buttons)
         self.defectsBtn.setText("Defects")
         self.lblCapacity_home.setText("capacity")
         self.lblTemperature_home.setText("temp")
 
-        self.calendarWidget.clicked.connect(self.getReservation)
+        self.calendarWidget.clicked.connect(self.get_reservation)
 
-        self.calendarWidgetSchedule.clicked.connect(self.getSchedule)
-        self.slotLeft.clicked.connect(self.scheduleButtons)
-        self.slotRight.clicked.connect(self.scheduleButtons)
+        self.calendarWidgetSchedule.clicked.connect(self.get_schedule)
+        self.slotLeft.clicked.connect(self.schedule_buttons)
+        self.slotRight.clicked.connect(self.schedule_buttons)
 
-        self.slot1.clicked.connect(self.radioCheck)
-        self.slot2.clicked.connect(self.radioCheck)
-        self.slot3.clicked.connect(self.radioCheck)
-        self.slot4.clicked.connect(self.radioCheck)
-        self.slot5.clicked.connect(self.radioCheck)
-        self.slot6.clicked.connect(self.radioCheck)
-        self.slot7.clicked.connect(self.radioCheck)
-        self.slot8.clicked.connect(self.radioCheck)
-        self.slot9.clicked.connect(self.radioCheck)
-        self.slot10.clicked.connect(self.radioCheck)
-        self.slot11.clicked.connect(self.radioCheck)
-        self.slot12.clicked.connect(self.radioCheck)
-        self.slot13.clicked.connect(self.radioCheck)
-        self.slot14.clicked.connect(self.radioCheck)
-        self.slot15.clicked.connect(self.radioCheck)
+        self.slot1.clicked.connect(self.radio_check)
+        self.slot2.clicked.connect(self.radio_check)
+        self.slot3.clicked.connect(self.radio_check)
+        self.slot4.clicked.connect(self.radio_check)
+        self.slot5.clicked.connect(self.radio_check)
+        self.slot6.clicked.connect(self.radio_check)
+        self.slot7.clicked.connect(self.radio_check)
+        self.slot8.clicked.connect(self.radio_check)
+        self.slot9.clicked.connect(self.radio_check)
+        self.slot10.clicked.connect(self.radio_check)
+        self.slot11.clicked.connect(self.radio_check)
+        self.slot12.clicked.connect(self.radio_check)
+        self.slot13.clicked.connect(self.radio_check)
+        self.slot14.clicked.connect(self.radio_check)
+        self.slot15.clicked.connect(self.radio_check)
 
         self.wakeButton.clicked.connect(self.wakeup)
-
-    def getReservation(self):
+        
+    def get_reservation(self):
         try:
-            self.reservation.getReservations(self.room, self.calendarWidget.selectedDate())
+            self.reservation.get_reservations(self.room, self.calendarWidget.selectedDate())
         except:
-            self.errorScheduleEvent("Failed to retrieve reservations")
-        self.setTimeTable()
+            self.error_schedule_event("Failed to retrieve reservations")
+        self.set_time_table()
 
-    def getSchedule(self):
+    def get_schedule(self):
         try:
-            self.scheduler.getSchedule(self.room, self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
+            self.scheduler.get_schedule(self.room, self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
         except:
-            self.errorScheduleEvent("Failed to retrieve bookings")
-        self.setSchedulerTable()
-        self.maxslots()
+            self.error_schedule_event("Failed to retrieve bookings")
+        self.set_scheduler_table()
+        self.slot = 0
+        self.maxSlots = 10
+        self.max_slots()
         if self.slot > self.maxSlots:
             self.slot = self.maxSlots
 
-    def menuButtons(self):
+    def menu_buttons(self):
         sender = self.sender()
-        self.resetTime()
+        self.reset_time()
         if sender is self.scheduleBtn:
             self.stackedWidget.setCurrentIndex(2)
         elif sender is self.defectsBtn:
-            self.defects.getDefects(self.room)
-            self.setDefectTable(self.defects.getDefectTableData())
+            self.defects.get_defects(self.room)
+            self.set_defect_table(self.defects.get_defect_table_data())
             self.stackedWidget.setCurrentIndex(3)
         elif sender is self.defectBack:
             self.defectQr.clear()
@@ -153,21 +160,21 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.scheduleQr.clear()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            qrCode.generateDefectQr(self.filename, self.defectTypeBox.currentText(), self.room)
+            qrCode.generate_defect_qr(self.filename, self.defectTypeBox.currentText(), self.room)
             pixmap = QPixmap(self.filename)
             self.defectQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
         elif sender is self.generate:
-            qrCode.generateBookingQr(self.filename, self.calendarWidgetSchedule.selectedDate(), self.selectedSlot,
-                                     self.lcdSlots.intValue(), self.room)
+            qrCode.generate_booking_qr(self.filename, self.calendarWidgetSchedule.selectedDate(), self.selectedSlot,
+                                       self.lcdSlots.intValue(), self.room)
             pixmap = QPixmap(self.filename)
             self.scheduleQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
 
-    def scheduleButtons(self):
+    def schedule_buttons(self):
         sender = self.sender()
-        self.resetTime()
-        self.maxslots()
+        self.reset_time()
+        self.max_slots()
         if sender is self.slotLeft:
             if self.slot > 1:
                 self.slot -= 1
@@ -179,11 +186,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                 self.slot = self.maxSlots
             self.lcdSlots.display(self.slot)
 
-
-    def radioCheck(self):
+    def radio_check(self):
         sender = self.sender()
-        self.resetTime()
-        self.maxslots()
+        self.reset_time()
+        self.max_slots()
         if sender is self.slot1:
             self.selectedSlot = 1
             self.maxSlots = 15
@@ -229,16 +235,16 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         elif sender is self.slot15:
             self.selectedSlot = 15
             self.maxSlots = 1
-        self.maxslots()
+        self.max_slots()
 
     def wakeup(self):
-        self.resetTime()
+        self.reset_time()
         self.stackedWidget.setCurrentIndex(1)
 
-    def maxslots(self):
+    def max_slots(self):
         b = False
         c = []
-        self.checkDisabledSlots()
+        self.check_disabled_slots()
         for i in self.taken:
             if i > self.selectedSlot:
                 c.append(i)
@@ -248,15 +254,15 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         if self.slot > self.maxSlots:
             self.slot = self.maxSlots
 
-    def checkDisabledSlots(self):
+    def check_disabled_slots(self):
         q = 1
         self.taken = []
-        for i in self.scheduler.getTimeSlotData():
+        for i in self.scheduler.get_time_slot_data():
             if i != q:
                 self.taken.append(q)
             q += 1
 
-    def distanceSensor(self):
+    def distance_sensor(self):
         GPIO.setmode(GPIO.BOARD)
         PIN_TRIGGER = 7
         PIN_ECHO = 11
@@ -288,7 +294,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
                     time.sleep(0.8)
-                if (time.time()) - self.start > 10 and distance > 80 and self.stackedWidget.currentIndex() is not 4:
+                if (time.time()) - self.start > 10 and distance > 100 and self.stackedWidget.currentIndex() is not 4:
                     self.stackedWidget.setCurrentIndex(0)
         finally:
             print('cleaning')
@@ -299,36 +305,36 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             time.sleep(1)
             self.wakeButton.setText(strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
 
-    def resetTime(self):
+    def reset_time(self):
         self.start = time.time()
 
-    def savePress(self):
+    def save_press(self):
         savestuff.write(str(self.roomNumTbox.text()))
         self.stackedWidget.setCurrentIndex(0)
 
     # ----json parse and table fill----
 
-    def setSchedulerTable(self):
+    def set_scheduler_table(self):
         print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-        timeSlotData = self.scheduler.getTimeSlotData()
+        time_slot_data = self.scheduler.get_time_slot_data()
         j = 0
         for i in self.radioButtonGroup.buttons():
-            if timeSlotData[j] != j + 1:
-                i.setText(timeSlotData[j])
+            if time_slot_data[j] != j + 1:
+                i.setText(time_slot_data[j])
                 i.setEnabled(False)
             j += 1
 
-    def setTimeTable(self):
-        model = QStringListModel(self.reservation.getTimeTableData())
+    def set_time_table(self):
+        model = QStringListModel(self.reservation.get_time_table_data())
         self.listView.setModel(model)
 
-    def setDefectTable(self, data):
+    def set_defect_table(self, data):
         model = QStringListModel(data)
         print(model)
         self.defectListView.setModel(model)
 
     # -----events
-    def errorScheduleEvent(self, string):
+    def error_schedule_event(self, string):
         reply = QMessageBox.question(self, 'Message',
                                      "An error has occurred: %s" % string, QMessageBox.Ok)
 
@@ -360,7 +366,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         text = "x: {0},  y: {1}".format(x, y)
         self.lblCapacity_home.setText(text)
 
-    def buttonClicked(self):
+    def button_clicked(self):
         sender = self.sender()
         if sender is self.scheduleBtn:
             self.lblTemperature_home.setText("scheduleBtn 1")

@@ -4,17 +4,20 @@ import reservations
 import scheduler
 import defects
 
-def getData(body, url):
+
+def get_data(body, url):
     r = requests.post(url, json=body)
     print('print response')
     text = r.content
     print(text)
     print("\n###########\n")
     data = json.loads(text)
+    print(data)
     print(json.dumps(data, indent=4, sort_keys=True))
     return data
 
-def parseData(data, type, date):
+
+def parse_data(data, type, date):
     if type == 0:
         for i in data:
             print("printing day:")

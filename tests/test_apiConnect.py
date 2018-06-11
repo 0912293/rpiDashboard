@@ -21,4 +21,4 @@ class TestApiConnect(TestCase):
         r = requests.post("http://markb.pythonanywhere.com/roomdefuncts/", json=body)
         data = json.loads(r.content)
 
-        self.assertEqual(a.getData(body, "http://markb.pythonanywhere.com/roomdefuncts/"),data)
+        self.assertEqual(a.get_data(body, "http://markb.pythonanywhere.com/roomdefuncts/"), data)

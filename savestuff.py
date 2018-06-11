@@ -2,11 +2,11 @@ import json
 import os.path
 
 filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"  # uncomment for testing
-#filename = "/home/pi/RaspberryPi/setup.json"   #uncomment for rpi
+# filename = "/home/pi/RaspberryPi/setup.json"   #uncomment for rpi
 
 
-def check():
-    return os.path.exists(filename)
+def check(file):
+    return os.path.exists(file)
 
 
 def create():

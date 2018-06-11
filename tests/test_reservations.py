@@ -1,5 +1,5 @@
 from unittest import TestCase
-from reservations import reservations
+from reservations import Reservations
 import requests
 
 
@@ -19,14 +19,14 @@ class Date:
 
 class TestReservations(TestCase):
     def test_getReservations(self):
-        r = reservations()
+        r = Reservations()
 
-        r.getReservations("H.3.403", Date())
-        for i in r.getTimeTableData():
+        r.get_reservations("H.3.403", Date())
+        for i in r.get_time_table_data():
             print(i)
 
     def test_getTimeTableData(self):
-        r = reservations()
-        self.assertEqual(r.getTimeTableData(),[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+        r = Reservations()
+        self.assertEqual(r.get_time_table_data(), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
 
 

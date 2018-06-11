@@ -27,8 +27,8 @@ class TestScheduler(TestCase): #TODO Not sure yet how to test radio buttons
     def test_getSchedule(self):
         s = Scheduler()
         self.setupUi(self)
-        s.getSchedule("H.3.403", Date(),self.initButtons())
+        s.get_schedule("H.3.403", Date(), self.initButtons())
 
     def test_getTimeSlotData(self):
         s = Scheduler()
-        self.assertEqual(s.getTimeSlotData(), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+        self.assertEqual(s.get_time_slot_data(), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])

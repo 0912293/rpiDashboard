@@ -1,7 +1,7 @@
 import qrcode
 
 
-def generateBookingQr(filename, date, selected, slots ,room):
+def generate_booking_qr(filename, date, selected, slots, room):
     print(filename + 'qr/qr.png')
     print(date.day())
     print(date.month())
@@ -18,7 +18,7 @@ def generateBookingQr(filename, date, selected, slots ,room):
     print("qr generated")
 
 
-def generateDefectQr(filename, type, room):
+def generate_defect_qr(filename, type, room):
     pix2 = qrcode.make(
         '{"defunct": {"type": "%s", "room": "%s"}}' % (type, room))
     pix2.save(filename)
