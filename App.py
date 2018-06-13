@@ -10,49 +10,54 @@ from PyQt5.QtCore import Qt, QStringListModel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from datetime import time
-import sys, os
+import sys
+import os
 import datetime
 import time
 import RPi.GPIO as GPIO
 import threading
 from time import gmtime, strftime
-import savestuff
+import SaveStuff
 import qrCode
-from defects import defects
-from reservations import Reservations
-from scheduler import Scheduler
-from db import Db
+from Defects import Defects
+from Reservations import Reservations
+from Scheduler import Scheduler
+from Db import Db
+from ScheduledBackUp import ScheduledBackUp
 
 
 class MainUi(QMainWindow, main.Ui_MainWindow):
     def __init__(self, parent=None):
-        self.defects = defects()
+        self.defects = Defects()
         self.reservation = Reservations()
         self.scheduler = Scheduler()
         self.db = Db()
+        self.schedulebackup = ScheduledBackUp()
 
-        if not savestuff.check('db.sqlite'):
+        if not SaveStuff.check('db.sqlite'):
             self.db.create()
 
         self.taken = []
 
         self.dir = os.path.dirname(__file__)
-        self.filename = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
-        self.filename2 = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"
-        # self.filename = "/home/pi/RaspberryPi/qr/qr.png"   #uncomment for rpi
-        # self.filename2 = "/home/pi/RaspberryPi/setup.json"
+        self.config = "C:/Users/kevin/PycharmProjects/Raspberry pi/setup.json"  # uncomment for testing
+        # self.config = "/home/pi/RaspberryPi/setup.json"  # uncomment for rpi
+        self.qr_pic = "C:/Users/kevin/PycharmProjects/Raspberry pi/qr/qr.png"  # uncomment for testing
+        # self.qr_pic = "/home/pi/RaspberryPi/qr/qr.png"   # uncomment for rpi
+        self.backup_schedule = "C:/Users/kevin/PycharmProjects/Raspberry pi/schedule"  # uncomment for testing
+        # self.backup_schedule = "/home/pi/RaspberryPi/schedule.json"  # uncomment for rpi
 
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.init_ui()
 
-        if not savestuff.check(self.filename2):
+        if not SaveStuff.check(self.config):
             self.stackedWidget.setCurrentIndex(4)
-            savestuff.create()
+            SaveStuff.create(self.config)
             self.savebtn.clicked.connect(self.save_press)
-            self.room = savestuff.read()
+            self.room = SaveStuff.read(self.config)['room']
         else:
-            self.room = savestuff.read()
+            self.room = SaveStuff.read(self.config)['room']
             self.stackedWidget.setCurrentIndex(0)
             print(self.room)
 
@@ -82,6 +87,11 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         thread2 = threading.Thread(target=self.clock, args=())
         thread2.daemon = True
         thread2.start()
+
+        SaveStuff.create(self.backup_schedule+".json")
+        SaveStuff.write({"week": datetime.date(self.year, self.month, self.day).isocalendar()[1]},
+                        self.backup_schedule+".json")
+        self.schedulebackup.update_schedule(self.room, self.backup_schedule)
 
         self.start = 0
 
@@ -124,12 +134,12 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.slot15.clicked.connect(self.radio_check)
 
         self.wakeButton.clicked.connect(self.wakeup)
-        
+
     def get_reservation(self):
-        try:
-            self.reservation.get_reservations(self.room, self.calendarWidget.selectedDate())
-        except:
-            self.error_schedule_event("Failed to retrieve reservations")
+        # try:
+        self.reservation.get_reservations(self.room, self.calendarWidget.selectedDate())
+        # except:
+        #     self.error_schedule_event("Failed to retrieve reservations")
         self.set_time_table()
 
     def get_schedule(self):
@@ -160,14 +170,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.scheduleQr.clear()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            qrCode.generate_defect_qr(self.filename, self.defectTypeBox.currentText(), self.room)
-            pixmap = QPixmap(self.filename)
+            qrCode.generate_defect_qr(self.qr_pic, self.defectTypeBox.currentText(), self.room)
+            pixmap = QPixmap(self.qr_pic)
             self.defectQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
         elif sender is self.generate:
-            qrCode.generate_booking_qr(self.filename, self.calendarWidgetSchedule.selectedDate(), self.selectedSlot,
+            qrCode.generate_booking_qr(self.qr_pic, self.calendarWidgetSchedule.selectedDate(), self.selectedSlot,
                                        self.lcdSlots.intValue(), self.room)
-            pixmap = QPixmap(self.filename)
+            pixmap = QPixmap(self.qr_pic)
             self.scheduleQr.setPixmap(pixmap.scaled(250, 250))
             print("qr set")
 
@@ -309,7 +319,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.start = time.time()
 
     def save_press(self):
-        savestuff.write(str(self.roomNumTbox.text()))
+        data = {'room': str(self.roomNumTbox.text())}
+        SaveStuff.write(data, self.config)
         self.stackedWidget.setCurrentIndex(0)
 
     # ----json parse and table fill----

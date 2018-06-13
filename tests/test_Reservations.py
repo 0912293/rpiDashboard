@@ -1,5 +1,5 @@
 from unittest import TestCase
-from reservations import Reservations
+from Reservations import Reservations
 import requests
 
 

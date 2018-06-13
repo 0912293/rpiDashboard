@@ -1,10 +1,11 @@
 import datetime
 
-import apiConnect
+from ApiConnect import ApiConnect
 
 
 class Scheduler:
     def __init__(self):
+        self.apiC = ApiConnect()
         self.timeSlotData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         self.timeSlotBackUp = ["Timeslot 1 08:30 09:20", "Timeslot 2 09:20 10:10", "Timeslot 3 10:30 11:20",
                                "Timeslot 4 11:20 12:10", "Timeslot 5 12:10 13:00", "Timeslot 6 13:00 13:50",
@@ -12,10 +13,10 @@ class Scheduler:
                                "Timeslot 10 17:00 17:50", "Timeslot 11 17:50 18:40", "Timeslot 12 18:40 19:30",
                                "Timeslot 13 19:30 20:20", "Timeslot 14 20:20 21:10", "Timeslot 15 21:10 22:00"]
 
-    def __enter_scheduler(self, timeFrom, timeTo, string):
-        time=timeFrom-1
-        for i in range(time,timeTo):
-            self.timeSlotData[time] = (str(time + 1) + string) #(string,timeFrom,timeTo)
+    def __enter_scheduler(self, time_from, time_to, string):
+        time = time_from - 1
+        for i in range(time, time_to):
+            self.timeSlotData[time] = (str(time + 1) + string)  # (string,timeFrom,timeTo)
             print(self.timeSlotData[time])
             time += 1
 
@@ -42,16 +43,17 @@ class Scheduler:
     def __get_data(self, room, week, date, url):
         body = {"room": room, "weeknummer": week}
         print("/////////////////////////Schedule")
-        data = apiConnect.get_data(body, url)
+        data = self.apiC.get_data(body, url)
         self.__parse_data(data, date)
 
     def __parse_data(self, data, date):
         for i in data:
-            if i["fields"]["date"][0:2] == str(date.day()) or i["fields"]["date"][1:2] == str(date.day()):
+            if i["fields"]["date"][0:2] == str(date.day()) and i["fields"]["date"][-4:] == str(date.year()) or\
+                    i["fields"]["date"][1:2] == str(date.day()) and i["fields"]["date"][-4:] == str(date.year()):
                 self.__enter_scheduler(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
-                                    " %s %s %s %s %s" % (str(i["fields"]["timefrom"]), str(i["fields"]["timeto"]),
-                                                         str(i["fields"]["room"]), str(i["fields"]["lesson"]),
-                                                         str(i["fields"]["username"])))
+                                       " %s %s %s %s %s" % (str(i["fields"]["timefrom"]), str(i["fields"]["timeto"]),
+                                                            str(i["fields"]["room"]), str(i["fields"]["lesson"]),
+                                                            str(i["fields"]["username"])))
 
     def get_time_slot_data(self):
         return self.timeSlotData

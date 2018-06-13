@@ -1,7 +1,7 @@
 import json
 from unittest import TestCase
 import requests
-import apiConnect
+import ApiConnect
 
 
 class TestApiConnect(TestCase):
@@ -15,7 +15,7 @@ class TestApiConnect(TestCase):
         self.assertEqual(r1.status_code, 200)
 
     def test_getData(self):
-        a = apiConnect
+        a = ApiConnect
         body = {"room": "H.3.403"}
 
         r = requests.post("http://markb.pythonanywhere.com/roomdefuncts/", json=body)

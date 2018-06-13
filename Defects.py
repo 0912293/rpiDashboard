@@ -1,9 +1,11 @@
 import datetime
 
-import apiConnect
+from ApiConnect import ApiConnect
 
-class defects():
+
+class Defects:
     def __init__(self):
+        self.apiC = ApiConnect()
         self.defectTableData = []
 
     def __enter_defects(self, description, handled, type):
@@ -22,7 +24,7 @@ class defects():
     def __get_data(self, room, url):
         body = {"room": room}
         print("~~~~~~~~~~~~~~~~~~Defunct")
-        data = apiConnect.get_data(body, url)
+        data = self.apiC.get_data(body, url)
         self.__parse_data(data)
 
     def __parse_data(self, data):

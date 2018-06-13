@@ -1,14 +1,14 @@
 from unittest import TestCase
-from defects import defects
+from Defects import Defects
 import requests
 
 class TestDefects(TestCase):
     def test_getDefects(self):
-        d = defects()
+        d = Defects()
         d.get_defects("H.3.403")
         for i in d.get_defect_table_data():
             print(i)
 
     def test_getDefectTableData(self):
-        d = defects()
+        d = Defects()
         self.assertEqual(d.get_defect_table_data(), [])

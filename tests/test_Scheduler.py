@@ -1,5 +1,5 @@
 from unittest import TestCase
-from scheduler import Scheduler
+from Scheduler import Scheduler
 import requests
 from PyQt5 import QtWidgets
 
