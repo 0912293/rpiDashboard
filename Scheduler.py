@@ -1,5 +1,5 @@
 import datetime
-
+import strings
 from ApiConnect import ApiConnect
 
 
@@ -26,7 +26,7 @@ class Scheduler:
         print(date)
         print("get schedule, getReservations calendar clicked")
         week = datetime.date(date.year(), date.month(), date.day()).isocalendar()[1]
-        self.__get_data(room, week, date, "http://markb.pythonanywhere.com/bookingbyroom/")
+        self.__get_data(room, week, date, strings.booking_url)
 
     def __fill_radio_button_list(self, rbg):
         self.radioButtonData = self.timeSlotBackUp

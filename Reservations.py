@@ -1,6 +1,5 @@
 import datetime
-import json
-
+import strings
 from ApiConnect import ApiConnect
 from ScheduledBackUp import ScheduledBackUp
 
@@ -18,20 +17,17 @@ class Reservations:
 
     def get_reservations(self, room, date):
         self.__fill_empty_list()
-        # date = self.calendarWidget.selectedDate()
         print(date)
         print("get schedule, calendar clicked")
         week = datetime.date(date.year(), date.month(), date.day()).isocalendar()[1]
         try:
-            self.__get_data(room, week, date, "http://markb.pythonanywhere.com/bookingbyroo/")  # TODO
+            self.__get_data(room, week, date, strings.booking_url)  # TODO
         except:
-            print("PROBLEM WITH NETWORK, PRINTING BACKUP DATA FROM JSON")
-            # data = json.loads(self.backup.get_schedule("C:/Users/kevin/PycharmProjects/Raspberry pi/schedule.json")) # TODO REMOVE, FOR TESTING
-            data = self.backup.get_schedule("C:/Users/kevin/PycharmProjects/Raspberry pi/schedule.json")
+            data = self.backup.get_schedule(strings.f_schedule_json)
             print(week-data["week"])
             schedule = None
             if week-data["week"] <= 2:
-                schedule = self.backup.get_schedule("C:/Users/kevin/PycharmProjects/Raspberry pi/schedule" +
+                schedule = self.backup.get_schedule(strings.f_backup_schedule +
                                                     str(week-data["week"])+".json")
             try:
                 self.__parse_data(schedule, date)

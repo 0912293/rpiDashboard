@@ -14,8 +14,10 @@ class ApiConnect:
         print(text)
         print("\n###########\n")
         self.data = json.loads(text)
-        # print(self.data)
+        print("data")
+        print(self.data)
         self.jsondump = json.dumps(self.data, indent=4, sort_keys=True)
+        print("dumping")
         print(self.jsondump)
         return self.__get_data()
 

@@ -1,5 +1,5 @@
 import datetime
-
+import strings
 from ApiConnect import ApiConnect
 
 
@@ -12,7 +12,7 @@ class Defects:
         self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
 
     def get_defects(self, room):
-        self.__get_data(room, "http://markb.pythonanywhere.com/roomdefuncts/")
+        self.__get_data(room, strings.defect_url)
 
     @staticmethod
     def get_defunct_types(defect_type_box):

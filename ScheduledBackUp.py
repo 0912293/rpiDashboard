@@ -1,5 +1,5 @@
 import json
-
+import strings
 # from Reservations import Reservations
 from Defects import Defects
 from ApiConnect import ApiConnect
@@ -21,15 +21,17 @@ class ScheduledBackUp:
     def update_schedule(self, room, filename):
         now = datetime.datetime.now()
         week = datetime.date(now.year, now.month, now.day).isocalendar()[1]
-        # self.db.clean_table('schedule')
         for i in range(3):
             print("weeks")
             print(week+i)
             body = {"room": room, "weeknummer": week+i}
-            self.apiC.get_data(body, "http://markb.pythonanywhere.com/bookingbyroom/")
-            # self.json_list = self.json_list + json.loads(self.apiC.get_dump())
-            SaveStuff.write(json.loads(self.apiC.get_dump()), str(filename+str(i)+".json"))
-        # self.__insert_into(filename)
+            try:
+                self.apiC.get_data(body, strings.booking_url)
+            except:
+                print("failed to connect")
+                return False
+            if "fields" in self.apiC.get_dump():
+                SaveStuff.write(json.loads(self.apiC.get_dump()), str(filename+str(i)+".json"))
 
     def __insert_into(self, filename):
         self.schedule = SaveStuff.read(filename)
@@ -38,6 +40,12 @@ class ScheduledBackUp:
     def get_schedule(self, filename):  # TODO CHANGE, FOR TESTING ATM
         self.schedule = SaveStuff.read(filename)
         return self.schedule
+
+    @staticmethod
+    def create_schedule(filename, date):
+        SaveStuff.create(filename+".json")
+        SaveStuff.write({"week": datetime.date(date.year, date.month, date.day).isocalendar()[1]},
+                        filename+".json")
 
 
     def update_defects(self):
