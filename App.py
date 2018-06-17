@@ -19,36 +19,37 @@ from time import strftime
 import SaveStuff
 import qrCode
 from Defects import Defects
+from TimeTable import TimeTable
 from Reservations import Reservations
-from Scheduler import Scheduler
-from Db import Db
 from ScheduledBackUp import ScheduledBackUp
 import strings
+from SetupScreen import SetupScreen
 
 
-class MainUi(QMainWindow, main.Ui_MainWindow):
+class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
     def __init__(self, parent=None):
         self.defects = Defects()
-        self.reservation = Reservations()
-        self.scheduler = Scheduler()
-        self.db = Db()
+        self.time_table = TimeTable()
+        self.reservations = Reservations()
         self.schedule_backup = ScheduledBackUp()
 
-        self.taken = []
+        self.taken = []  # used to store taken time slots for reservations
 
         super(MainUi, self).__init__(parent)
         self.setupUi(self)
         self.init_ui()
 
-        if not SaveStuff.check(strings.f_config):  # H.3.403
-            self.stackedWidget.setCurrentIndex(4)
+        self.setupScreen = SetupScreen(self.roomNumTbox, self.stackedWidget)
+
+        if not SaveStuff.check(strings.f_config):   # checks if the config file exists
+            self.stackedWidget.setCurrentIndex(4)   # if this is the first time running the rpi it will setup the room
             SaveStuff.create(strings.f_config)
             self.savebtn.clicked.connect(self.save_press)
         else:
             self.stackedWidget.setCurrentIndex(0)
-            self.get_reservation()
+            self.get_time_table()
 
-        self.get_reservation()
+        self.get_time_table()
 
         self.defects.get_defunct_types(self.defectTypeBox)
 
@@ -59,39 +60,32 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.passCounter = 0
 
-        thread = threading.Thread(target=self.distance_sensor)
+        thread = threading.Thread(target=self.distance_sensor)  # thread for running the distance sensor
         thread.daemon = True
         thread.start()
 
-        thread2 = threading.Thread(target=self.clock)
+        thread2 = threading.Thread(target=self.clock)   # thread for running the clock
         thread2.daemon = True
         thread2.start()
 
-        thread3 = threading.Thread(target=self.backup_schedule)
+        thread3 = threading.Thread(target=self.backup_schedule)     # thread for running scheduled backups
         thread3.daemon = True
         thread3.start()
 
         self.start = 0
 
-    def init_ui(self):
+    def init_ui(self):      # connecting ui to listeners
         QMainWindow.showFullScreen(self)
-        self.scheduleBtn.setToolTip("button 1")
-        self.defectsBtn.setToolTip("button 2")
         self.defectsBtn.clicked.connect(self.menu_buttons)
         self.defectBack.clicked.connect(self.menu_buttons)
         self.generateDefect.clicked.connect(self.menu_buttons)
-        self.lblCapacity_home.setToolTip("Label 1")
-        self.lblTemperature_home.setToolTip("Label 2")
         self.scheduleBtn.clicked.connect(self.menu_buttons)
         self.scheduleBack.clicked.connect(self.menu_buttons)
         self.generate.clicked.connect(self.menu_buttons)
-        self.defectsBtn.setText("Defects")
-        self.lblCapacity_home.setText("capacity")
-        self.lblTemperature_home.setText("temp")
 
-        self.calendarWidget.clicked.connect(self.get_reservation)
+        self.calendarWidget.clicked.connect(self.get_time_table)
 
-        self.calendarWidgetSchedule.clicked.connect(self.get_schedule)
+        self.calendarWidgetSchedule.clicked.connect(self.get_reservations)
         self.slotLeft.clicked.connect(self.schedule_buttons)
         self.slotRight.clicked.connect(self.schedule_buttons)
 
@@ -113,14 +107,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
         self.wakeButton.clicked.connect(self.wakeup)
 
-    def get_reservation(self):
-        self.reservation.get_reservations(SaveStuff.read(strings.f_config)['room'], self.calendarWidget.selectedDate())
+    def get_time_table(self):   # gets time table data and inserts it
+        self.time_table.get_time_table(SaveStuff.read(strings.f_config)['room'], self.calendarWidget.selectedDate())
         self.set_time_table()
 
-    def get_schedule(self):
+    def get_reservations(self):     # gets reservation data and inserts it
         try:
-            self.scheduler.get_schedule(SaveStuff.read(strings.f_config)['room'],
-                                        self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
+            self.reservations.get_reservations(SaveStuff.read(strings.f_config)['room'],
+                                               self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
         except:
             self.error_schedule_event("Failed to retrieve bookings")
         self.set_scheduler_table()
@@ -133,14 +127,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 # ---------Button stuff------------
 
     def menu_buttons(self):
-        sender = self.sender()
-        self.reset_time()
+        sender = self.sender()  # checks which button was clicked
+        self.reset_time()       # resets sleep timer so the screen doesn't turn off while someone is using it
         if sender is self.scheduleBtn:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
-                                                    strings.f_backup_schedule) is not False:
-                self.get_schedule()
+            if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:    # checks if there is a connection otherwise prevent user from making reservations
                 self.stackedWidget.setCurrentIndex(2)
+                self.get_reservations()
             else:
+                self.stackedWidget.setCurrentIndex(1)
                 self.error_schedule_event("No connection")
         elif sender is self.defectsBtn:
             self.defects.get_defects(SaveStuff.read(strings.f_config)['room'])
@@ -148,15 +142,14 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.stackedWidget.setCurrentIndex(3)
         elif sender is self.defectBack:
             self.defectQr.clear()
-            self.get_reservation()
+            self.get_time_table()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.scheduleBack:
             self.scheduleQr.clear()
-            self.get_reservation()
+            self.get_time_table()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
-                                                    strings.f_backup_schedule) is not False:
+            if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:   # checks if there is a connection otherwise prevent user from submiting defects
                 qrCode.generate_defect_qr(strings.f_qr_pic, self.defectTypeBox.currentText(),
                                           SaveStuff.read(strings.f_config)['room'])
                 pixmap = QPixmap(strings.f_qr_pic)
@@ -165,8 +158,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                 self.error_schedule_event("No connection, it's not recommended to submit a defect"
                                           " at the moment please try again later")
         elif sender is self.generate:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
-                                                    strings.f_backup_schedule) is not False:
+            if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:    # checks if there is a connection otherwise prevent user from making reservations
                 if self.check_reservation():
                     qrCode.generate_booking_qr(strings.f_qr_pic, self.calendarWidgetSchedule.selectedDate(),
                                                self.selectedSlot,
@@ -174,10 +166,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
                     pixmap = QPixmap(strings.f_qr_pic)
                     self.scheduleQr.setPixmap(pixmap.scaled(250, 250))
                 else:
-                    pass
+                    self.error_schedule_event("Please select a valid slot")
             else:
                 self.error_schedule_event("No connection")
-                self.get_reservation()
+                self.get_time_table()
                 self.stackedWidget.setCurrentIndex(1)
 
     def schedule_buttons(self):
@@ -205,9 +197,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         self.selectedSlot = sender_id
         self.maxSlots = 16 - sender_id
         self.max_slots()
-        self.radioButtonGroup.button(sender_id).setChecked(False)
 
-    def max_slots(self):
+    def max_slots(self):    # used to determine the max amount of slots a user can select
         b = False
         c = []
         self.check_disabled_slots()
@@ -220,19 +211,19 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         if self.slot > self.maxSlots:
             self.slot = self.maxSlots
 
-    def check_disabled_slots(self):
+    def check_disabled_slots(self):     # checks which time slots already have reservations
         q = 1
         self.taken = []
-        for i in self.scheduler.get_time_slot_data():
+        for i in self.reservations.get_time_slot_data():
             if i != q:
                 self.taken.append(q)
             q += 1
 
-    def check_reservation(self):
+    def check_reservation(self):        # check to see if the reservation is good
         for i in self.taken:
             if i == self.selectedSlot:
-                self.error_schedule_event("Please select a valid slot")
                 return False
+        return True
 
 # ----------sensor--------------
 
@@ -251,29 +242,29 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         try:
             while True:
                 time.sleep(0.1)
-                GPIO.output(PIN_TRIGGER, GPIO.HIGH)
+                GPIO.output(PIN_TRIGGER, GPIO.HIGH)     # makes the sonar send a pulse
                 time.sleep(0.00001)
                 GPIO.output(PIN_TRIGGER, GPIO.LOW)
                 while GPIO.input(PIN_ECHO) == 0:
-                    pulse_start_time = time.time()
+                    pulse_start_time = time.time()      # checks the timer after sending the pulse
                 while GPIO.input(PIN_ECHO) == 1:
-                    pulse_end_time = time.time()
-                pulse_duration = pulse_end_time - pulse_start_time
-                distance = round(pulse_duration * 17150, 2)
-                self.lblCapacity_home.setText("Distance:" + str(distance) + "cm")
-                if distance < 40 and self.stackedWidget.currentIndex() is 0:
-                    self.get_reservation()
+                    pulse_end_time = time.time()        # checks the time after getting the input back
+                pulse_duration = pulse_end_time - pulse_start_time      # calculates the difference in time between sending and recieving the pulse
+                distance = round(pulse_duration * 17150, 2)                         # calculates the distance using the rough speed of sound which is 34300 cm/s
+                self.lblCapacity_home.setText("Distance:" + str(distance) + "cm")   # since the duration is the time it took hitting an object and bouncing back we devide this by 2 making it 17150 cm/s
+                if distance < 40 and self.stackedWidget.currentIndex() is 0:        # if someone gets close to the raspberry pi it will wake up and go to the main menu
+                    self.get_time_table()
                     self.stackedWidget.setCurrentIndex(1)
-                    self.start = time.time()
-                elif distance < 100 and distance is not 0 and self.stackedWidget.currentIndex() is 0:
+                    self.start = time.time()        # starts a timer to go back to sleep after being inactive for a while
+                elif distance < 100 and distance is not 0 and self.stackedWidget.currentIndex() is 0:   # checks how many people have walked passed the raspberry pi
                     self.passCounter += 1
                     self.distanceTest.setText(str(self.passCounter))
                     time.sleep(0.8)
                 if (time.time()) - self.start > 10 and distance > 100 and self.stackedWidget.currentIndex() is not 4:
-                    self.stackedWidget.setCurrentIndex(0)
+                    self.stackedWidget.setCurrentIndex(0)       # puts rpi back to sleep after 10 sec atm if no one is near it
         finally:
             print('cleaning')
-            GPIO.cleanup()
+            GPIO.cleanup()  # clean up of the GPIO pins to ensure an end to our try
 
     def clock(self):
         while True:
@@ -285,73 +276,57 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def wakeup(self):
         self.reset_time()
-        self.get_reservation()
+        self.get_time_table()
         self.stackedWidget.setCurrentIndex(1)
-
-    def save_press(self):
-        data = {'room': str(self.roomNumTbox.text())}
-        SaveStuff.write(data, strings.f_config)
-        self.stackedWidget.setCurrentIndex(0)
 
 # -------------data stuff-------------
 
     def set_scheduler_table(self):
-        time_slot_data = self.scheduler.get_time_slot_data()
+        time_slot_data = self.reservations.get_time_slot_data()
         j = 0
         for i in self.radioButtonGroup.buttons():
-            if time_slot_data[j] != j + 1:
+            if time_slot_data[j] != j + 1:      # inserts data into view and disables radio buttons that are unavailable
                 i.setText(time_slot_data[j])
                 i.setEnabled(False)
             j += 1
 
     def set_time_table(self):
-        model = QStringListModel(self.reservation.get_time_table_data())
-        self.listView.setModel(model)
+        model = QStringListModel(self.time_table.get_time_table_data())
+        self.listView.setModel(model)       # inserts model into view
 
     def set_defect_table(self, data):
-        model = QStringListModel(data)
+        model = QStringListModel(data)      # inserts model into view
         self.defectListView.setModel(model)
 
     def backup_schedule(self):
-        self.get_reservation()
+        self.get_time_table()
         now = datetime.datetime.now()
         print("Updating schedule:" + str(now))
         self.schedule_backup.create_schedule(strings.f_backup_schedule, now)
         self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule)
-        # self.sd.enter(5, 1, self.backup_schedule)
-        if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
-                                                strings.f_backup_schedule) is not False:
+        if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:
             self.backup_time_lbl.setText("Last successful back up made at: " + now.strftime("%d %b") + " " +
                                          str(now.hour) + ":" + str(now.minute))
             self.connection_status_label.setText("Connection status: online")
         else:
             self.connection_status_label.setText("Connection status: offline")
-        time.sleep(600)
+        time.sleep(600)     # tries to back up from api every 10 minutes and displays the last successful "pull" and status
         self.backup_schedule()
 
 # ------------------events-------------
 
-    def error_schedule_event(self, string):
+    def error_schedule_event(self, string):     # error event to give feedback to the user if something goes wrong
         reply = QMessageBox.question(self, 'Message',
                                      "An error has occurred: %s" % string, QMessageBox.Ok)
 
-    def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Message',
-                                     "Are you sure to quit?", QMessageBox.Yes |
-                                     QMessageBox.No, QMessageBox.No)
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
-
-    def closeEvent(self):
+    def closeEvent(self):   # close event which is called after user presses esc
         reply = QMessageBox.question(self, 'Message',
                                      "Are you sure to quit?", QMessageBox.Yes |
                                      QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             QApplication.instance().quit()
 
-    def keyPressEvent(self, e):
+    def keyPressEvent(self, e):     # calls close event upon pressing esc
         if e.key() == Qt.Key_Escape:
             self.closeEvent()
 

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Scheduler import Scheduler
+from Reservations import Reservations
 import requests
 from PyQt5 import QtWidgets
 
@@ -26,10 +26,10 @@ class TestScheduler(TestCase):  # TODO Not sure yet how to test radio buttons
         return rbg
 
     def test_getSchedule(self):
-        s = Scheduler()
+        s = Reservations()
         self.setupUi(self)
-        s.get_schedule("H.3.403", Date(), self.initButtons())
+        s.get_reservations("H.3.403", Date(), self.initButtons())
 
     def test_getTimeSlotData(self):
-        s = Scheduler()
+        s = Reservations()
         self.assertEqual(s.get_time_slot_data(), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])

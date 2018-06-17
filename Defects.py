@@ -15,7 +15,7 @@ class Defects:
         self.__get_data(room, strings.defect_url)
 
     @staticmethod
-    def get_defunct_types(defect_type_box):
+    def get_defunct_types(defect_type_box):     # currently a hard coded list but would've like for this to be retrieved from api if that was a possibility
         defect_type_box.addItem("notype")
         defect_type_box.addItem("type 1")
         defect_type_box.addItem("type 2")
@@ -26,9 +26,9 @@ class Defects:
         data = self.apiC.get_data(body, url)
         self.__parse_data(data)
 
-    def __parse_data(self, data):
+    def __parse_data(self, data):   # enters defects into model
         for i in data:
             self.__enter_defects(i["fields"]["description"], i["fields"]["handled"], i["fields"]["type"])
 
     def get_defect_table_data(self):
-        return self.defectTableData
+        return self.defectTableData     # returns model
