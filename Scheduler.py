@@ -16,33 +16,25 @@ class Scheduler:
     def __enter_scheduler(self, time_from, time_to, string):
         time = time_from - 1
         for i in range(time, time_to):
-            self.timeSlotData[time] = (str(time + 1) + string)  # (string,timeFrom,timeTo)
-            print(self.timeSlotData[time])
+            self.timeSlotData[time] = (str(time + 1) + string)
             time += 1
 
     def get_schedule(self, room, date, rbg):
         self.__fill_radio_button_list(rbg)
-        print('------------------------------------------------')
-        print(date)
-        print("get schedule, getReservations calendar clicked")
         week = datetime.date(date.year(), date.month(), date.day()).isocalendar()[1]
         self.__get_data(room, week, date, strings.booking_url)
 
     def __fill_radio_button_list(self, rbg):
         self.radioButtonData = self.timeSlotBackUp
-        print("RadioButtons")
         q = 0
         for i in rbg.buttons():
             self.timeSlotData[q] = q+1
-            print(self.radioButtonData[q])
             i.setText(self.radioButtonData[q])
             i.setEnabled(True)
             q += 1
-        print("xxxxxxxx")
 
     def __get_data(self, room, week, date, url):
         body = {"room": room, "weeknummer": week}
-        print("/////////////////////////Schedule")
         data = self.apiC.get_data(body, url)
         self.__parse_data(data, date)
 

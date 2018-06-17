@@ -22,13 +22,10 @@ class ScheduledBackUp:
         now = datetime.datetime.now()
         week = datetime.date(now.year, now.month, now.day).isocalendar()[1]
         for i in range(3):
-            print("weeks")
-            print(week+i)
             body = {"room": room, "weeknummer": week+i}
             try:
                 self.apiC.get_data(body, strings.booking_url)
             except:
-                print("failed to connect")
                 return False
             if "fields" in self.apiC.get_dump():
                 SaveStuff.write(json.loads(self.apiC.get_dump()), str(filename+str(i)+".json"))
@@ -47,18 +44,5 @@ class ScheduledBackUp:
         SaveStuff.write({"week": datetime.date(date.year, date.month, date.day).isocalendar()[1]},
                         filename+".json")
 
-
     def update_defects(self):
         pass
-
-    # def update_schedule(self, room):
-    #     now = datetime.datetime.now()
-    #     week = datetime.date(now.year, now.month, now.day).isocalendar()[1]
-    #     self.db.clean_table('schedule')
-    #     for i in range(3):
-    #         print("weeks")
-    #         print(week + i)
-    #         body = {"room": room, "weeknummer": week + i}
-    #         self.apiC.get_data(body, "http://markb.pythonanywhere.com/bookingbyroom/")
-    #         self.db.insert_into_schedule(week + i, self.apiC.get_dump())
-    #     self.db.get_all_from_schedule()

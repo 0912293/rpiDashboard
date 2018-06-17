@@ -9,16 +9,9 @@ class ApiConnect:
 
     def get_data(self, body, url):
         r = requests.post(url, json=body)
-        print('print response')
         text = r.content
-        print(text)
-        print("\n###########\n")
         self.data = json.loads(text)
-        print("data")
-        print(self.data)
         self.jsondump = json.dumps(self.data, indent=4, sort_keys=True)
-        print("dumping")
-        print(self.jsondump)
         return self.__get_data()
 
     def __get_data(self):

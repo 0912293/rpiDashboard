@@ -3,6 +3,7 @@ from Scheduler import Scheduler
 import requests
 from PyQt5 import QtWidgets
 
+
 class Date:
     @staticmethod
     def year():
@@ -17,10 +18,10 @@ class Date:
         return 13
 
 
-class TestScheduler(TestCase): #TODO Not sure yet how to test radio buttons
+class TestScheduler(TestCase):  # TODO Not sure yet how to test radio buttons
     def initButtons(self):
         rbg = QtWidgets.QButtonGroup()
-        for i in range(1,15):
+        for i in range(1, 15):
             rbg.addButton(QtWidgets.QRadioButton)
         return rbg
 

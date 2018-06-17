@@ -23,7 +23,6 @@ class Defects:
 
     def __get_data(self, room, url):
         body = {"room": room}
-        print("~~~~~~~~~~~~~~~~~~Defunct")
         data = self.apiC.get_data(body, url)
         self.__parse_data(data)
 

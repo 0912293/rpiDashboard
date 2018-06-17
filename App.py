@@ -13,9 +13,9 @@ from datetime import time
 import sys
 import datetime
 import time
-import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO  # delete folder for rpi
 import threading
-from time import gmtime, strftime
+from time import strftime
 import SaveStuff
 import qrCode
 from Defects import Defects
@@ -119,7 +119,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def get_schedule(self):
         try:
-            self.scheduler.get_schedule(SaveStuff.read(strings.f_config)['room'], self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
+            self.scheduler.get_schedule(SaveStuff.read(strings.f_config)['room'],
+                                        self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
         except:
             self.error_schedule_event("Failed to retrieve bookings")
         self.set_scheduler_table()
@@ -135,7 +136,8 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
         sender = self.sender()
         self.reset_time()
         if sender is self.scheduleBtn:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule) is not False:
+            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
+                                                    strings.f_backup_schedule) is not False:
                 self.get_schedule()
                 self.stackedWidget.setCurrentIndex(2)
             else:
@@ -153,23 +155,24 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
             self.get_reservation()
             self.stackedWidget.setCurrentIndex(1)
         elif sender is self.generateDefect:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule) is not False:
-                qrCode.generate_defect_qr(strings.f_qr_pic, self.defectTypeBox.currentText(), SaveStuff.read(strings.f_config)['room'])
+            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
+                                                    strings.f_backup_schedule) is not False:
+                qrCode.generate_defect_qr(strings.f_qr_pic, self.defectTypeBox.currentText(),
+                                          SaveStuff.read(strings.f_config)['room'])
                 pixmap = QPixmap(strings.f_qr_pic)
                 self.defectQr.setPixmap(pixmap.scaled(250, 250))
-                print("qr set")
             else:
                 self.error_schedule_event("No connection, it's not recommended to submit a defect"
                                           " at the moment please try again later")
         elif sender is self.generate:
-            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule) is not False:
+            if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
+                                                    strings.f_backup_schedule) is not False:
                 if self.check_reservation():
                     qrCode.generate_booking_qr(strings.f_qr_pic, self.calendarWidgetSchedule.selectedDate(),
                                                self.selectedSlot,
                                                self.lcdSlots.intValue(), SaveStuff.read(strings.f_config)['room'])
                     pixmap = QPixmap(strings.f_qr_pic)
                     self.scheduleQr.setPixmap(pixmap.scaled(250, 250))
-                    print("qr set")
                 else:
                     pass
             else:
@@ -307,22 +310,23 @@ class MainUi(QMainWindow, main.Ui_MainWindow):
 
     def set_defect_table(self, data):
         model = QStringListModel(data)
-        print(model)
         self.defectListView.setModel(model)
 
     def backup_schedule(self):
+        self.get_reservation()
         now = datetime.datetime.now()
         print("Updating schedule:" + str(now))
         self.schedule_backup.create_schedule(strings.f_backup_schedule, now)
         self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule)
         # self.sd.enter(5, 1, self.backup_schedule)
-        if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'], strings.f_backup_schedule) is not False:
+        if self.schedule_backup.update_schedule(SaveStuff.read(strings.f_config)['room'],
+                                                strings.f_backup_schedule) is not False:
             self.backup_time_lbl.setText("Last successful back up made at: " + now.strftime("%d %b") + " " +
                                          str(now.hour) + ":" + str(now.minute))
             self.connection_status_label.setText("Connection status: online")
         else:
             self.connection_status_label.setText("Connection status: offline")
-        time.sleep(5)
+        time.sleep(600)
         self.backup_schedule()
 
 # ------------------events-------------

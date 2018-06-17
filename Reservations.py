@@ -17,14 +17,11 @@ class Reservations:
 
     def get_reservations(self, room, date):
         self.__fill_empty_list()
-        print(date)
-        print("get schedule, calendar clicked")
         week = datetime.date(date.year(), date.month(), date.day()).isocalendar()[1]
         try:
             self.__get_data(room, week, date, strings.booking_url)  # TODO
         except:
             data = self.backup.get_schedule(strings.f_schedule_json)
-            print(week-data["week"])
             schedule = None
             if week-data["week"] <= 2:
                 schedule = self.backup.get_schedule(strings.f_backup_schedule +
@@ -37,19 +34,14 @@ class Reservations:
     def __fill_empty_list(self):
         for i in range(15):
             self.__timeTableData[i] = ("%d Empty" % (i + 1))
-            print(i+1)
 
     def __get_data(self, room, week, date, url):
         body = {"room": room, "weeknummer": week}
-        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\calendar")
         data = self.apiC.get_data(body, url)
         self.__parse_data(data, date)
 
     def __parse_data(self, data, date):
         for i in data:
-            print("printing day:")
-            print(str(date.day()))
-            print(i["fields"]["date"][0:2] == str(date.day()))
             if i["fields"]["date"][0:2] == str(date.day()) and i["fields"]["date"][-4:] == str(date.year()) or \
                     i["fields"]["date"][1:2] == str(date.day()) and i["fields"]["date"][-4:] == str(date.year()):
                 self.__enter_reservation(int(i["fields"]["timeslotfrom"]), int(i["fields"]["timeslotto"]),
