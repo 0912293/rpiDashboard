@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app.py" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd8122e6-2294-486b-b4f3-8257ff76dd0b" name="Default" comment="">
+    <list default="true" id="cd8122e6-2294-486b-b4f3-8257ff76dd0b" name="Default" comment="#Doing&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Done&#10;refactored method and class names to PEP8 standards &#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor">
+      <change beforePath="" afterPath="$PROJECT_DIR$/tests/test_timeTable.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change beforePath="$PROJECT_DIR$/qrCode.py" afterPath="$PROJECT_DIR$/qrCode.py" />
+      <change beforePath="$PROJECT_DIR$/ApiConnect.py" afterPath="$PROJECT_DIR$/ApiConnect.py" />
+      <change beforePath="$PROJECT_DIR$/App.py" afterPath="$PROJECT_DIR$/App.py" />
+      <change beforePath="$PROJECT_DIR$/SetupScreen.py" afterPath="$PROJECT_DIR$/SetupScreenListener.py" />
+      <change beforePath="$PROJECT_DIR$/designer/main.py" afterPath="$PROJECT_DIR$/designer/main.py" />
+      <change beforePath="$PROJECT_DIR$/strings.py" afterPath="$PROJECT_DIR$/strings.py" />
+      <change beforePath="$PROJECT_DIR$/tests/test_ApiConnect.py" afterPath="$PROJECT_DIR$/tests/test_ApiConnect.py" />
+      <change beforePath="$PROJECT_DIR$/tests/test_Defects.py" afterPath="$PROJECT_DIR$/tests/test_Defects.py" />
+      <change beforePath="$PROJECT_DIR$/tests/test_Reservations.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/tests/test_Scheduler.py" afterPath="$PROJECT_DIR$/tests/test_reservations.py" />
     </list>
     <ignored path=".idea/modules.xml" />
     <ignored path=".idea/misc.xml" />
@@ -23,46 +28,159 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_apiConnect_py.coverage" NAME="Unittests in test_apiConnect.py Coverage Results" MODIFIED="1528064857026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Raspberry_pi$uiTest.coverage" NAME="uiTest Coverage Results" MODIFIED="1521116870169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$db.coverage" NAME="db Coverage Results" MODIFIED="1528366288109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1528066702357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Raspberry_pi$schedule.coverage" NAME="schedule Coverage Results" MODIFIED="1522053002306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$App.coverage" NAME="App Coverage Results" MODIFIED="1529281006529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_apiConnect_TestApiConnect_test_getData.coverage" NAME="Unittests for test_apiConnect.TestApiConnect.test_getData Coverage Results" MODIFIED="1528064463219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/RaspberryPi$apiConnect.coverage" NAME="apiConnect Coverage Results" MODIFIED="1528061254710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_defects_py.coverage" NAME="Unittests in test_defects.py Coverage Results" MODIFIED="1528064981144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_mainUi_py.coverage" NAME="Unittests in test_mainUi.py Coverage Results" MODIFIED="1528066382053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1522779661786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/designer" />
-    <SUITE FILE_PATH="coverage/Raspberry_pi$app.coverage" NAME="app Coverage Results" MODIFIED="1522906280823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Db.coverage" NAME="Db Coverage Results" MODIFIED="1528915865822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$client.coverage" NAME="client Coverage Results" MODIFIED="1519831432162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/oauth2client" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_scheduler_py.coverage" NAME="Unittests in test_scheduler.py Coverage Results" MODIFIED="1528066185037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_defects_TestDefects_test_getDefects.coverage" NAME="Unittests for test_defects.TestDefects.test_getDefects Coverage Results" MODIFIED="1528065001163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Raspberry_pi$ui.coverage" NAME="ui Coverage Results" MODIFIED="1521719638562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_ApiConnect_py.coverage" NAME="Unittests in test_ApiConnect.py Coverage Results" MODIFIED="1529279939762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_reservations_py.coverage" NAME="Unittests in test_reservations.py Coverage Results" MODIFIED="1528065699165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Scheduler.coverage" NAME="Scheduler Coverage Results" MODIFIED="1529231717540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_timeTable_py.coverage" NAME="Unittests in test_timeTable.py Coverage Results" MODIFIED="1529273031651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Raspberry_pi$scheduleScreen.coverage" NAME="scheduleScreen Coverage Results" MODIFIED="1521805909704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/designer" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_mainUi_TestMainUi.coverage" NAME="Unittests for test_mainUi.TestMainUi Coverage Results" MODIFIED="1529272483707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$DbUpdate.coverage" NAME="DbUpdate Coverage Results" MODIFIED="1528724210685" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Raspberry_pi$uiTest.coverage" NAME="uiTest Coverage Results" MODIFIED="1521116870169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Raspberry_pi$schedule.coverage" NAME="schedule Coverage Results" MODIFIED="1522053002306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_timeTable_TestTimeTable_test_get_time_table.coverage" NAME="Unittests for test_timeTable.TestTimeTable.test_get_time_table Coverage Results" MODIFIED="1529273041412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_mainUi_py.coverage" NAME="Unittests in test_mainUi.py Coverage Results" MODIFIED="1528066382053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Raspberry_pi$app.coverage" NAME="app Coverage Results" MODIFIED="1522906280823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$quickstart.coverage" NAME="quickstart Coverage Results" MODIFIED="1519832493082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$shit.coverage" NAME="shit Coverage Results" MODIFIED="1521332634352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$main.coverage" NAME="main Coverage Results" MODIFIED="1522051730823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$home.coverage" NAME="home Coverage Results" MODIFIED="1522312368301" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_scheduler_py.coverage" NAME="Unittests in test_scheduler.py Coverage Results" MODIFIED="1528066185037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Raspberry_pi$PiTest.coverage" NAME="PiTest Coverage Results" MODIFIED="1521719621390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_defects_TestDefects_test_getDefects.coverage" NAME="Unittests for test_defects.TestDefects.test_getDefects Coverage Results" MODIFIED="1528065001163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$app.coverage" NAME="app Coverage Results" MODIFIED="1528203704354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Raspberry_pi$ui.coverage" NAME="ui Coverage Results" MODIFIED="1521719638562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_in_test_reservations_py.coverage" NAME="Unittests in test_reservations.py Coverage Results" MODIFIED="1528065699165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Raspberry_pi$scheduleScreen.coverage" NAME="scheduleScreen Coverage Results" MODIFIED="1521805909704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/designer" />
-    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_mainUi_TestMainUi.coverage" NAME="Unittests for test_mainUi.TestMainUi Coverage Results" MODIFIED="1528066522949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$app.coverage" NAME="app Coverage Results" MODIFIED="1528695953781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Reservations.coverage" NAME="Reservations Coverage Results" MODIFIED="1528914828377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_ApiConnect_TestApiConnect_test_api_connection.coverage" NAME="Unittests for test_ApiConnect.TestApiConnect.test_api_connection Coverage Results" MODIFIED="1529279934836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$ScheduledBackUp.coverage" NAME="ScheduledBackUp Coverage Results" MODIFIED="1529206376619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_Defects_TestDefects.coverage" NAME="Unittests for test_Defects.TestDefects Coverage Results" MODIFIED="1529272233432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/RaspberryPi$Unittests_for_test_timeTable_TestTimeTable.coverage" NAME="Unittests for test_timeTable.TestTimeTable Coverage Results" MODIFIED="1529272895711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/designer/main.py">
+      <file leaf-file-name="ApiConnect.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ApiConnect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="54" column="47" lean-forward="true" selection-start-line="54" selection-start-column="47" selection-end-line="54" selection-end-column="47" />
+            <state relative-caret-position="187">
+              <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_scheduledBackUp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_scheduledBackUp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app.py">
+      <file leaf-file-name="test_ApiConnect.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_ApiConnect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="159" column="37" lean-forward="true" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
+            <state relative-caret-position="340">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_reservations.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_reservations.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_timeTable.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_timeTable.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_Defects.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_Defects.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/strings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/designer/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="32" column="64" lean-forward="false" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SetupScreenListener.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SetupScreenListener.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimeTable.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TimeTable.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -79,36 +197,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>radiobutton</find>
-      <find>radiobuttongro</find>
-      <find>maxslots</find>
-      <find>taken</find>
-      <find>calenda</find>
-      <find>enterd</find>
-      <find>getdata</find>
-      <find>defects</find>
-      <find>setschedul</find>
-      <find>asd</find>
-      <find>defectlist</find>
-      <find>defectList</find>
-      <find>defect</find>
-      <find>entersc</find>
-      <find>selecteddate</find>
-      <find>fillempty</find>
-      <find>get</find>
-      <find>reservations</find>
-      <find>getReservations</find>
-      <find>getschedule</find>
-      <find>getreservations</find>
-      <find>init</find>
-      <find>getsc</find>
-      <find>getrese</find>
-      <find>timeSlotData</find>
+      <find>dbu</find>
+      <find>datetime</find>
+      <find>set_time_table</find>
+      <find>backup_schedule</find>
+      <find>list</find>
+      <find>if self.sched</find>
+      <find>self.f_config</find>
+      <find>self.f_qr_pic</find>
+      <find>self.f_backup_schedule</find>
+      <find>dir</find>
+      <find>self.taken</find>
+      <find>save_pres</find>
+      <find>self.room</find>
+      <find>setcurrentIndex(1)</find>
+      <find>setcurrentIndex(2)</find>
+      <find>print</find>
+      <find>save</find>
+      <find>save_pre</find>
+      <find>TimeTable</find>
       <find>error</find>
-      <find>TODO</find>
-      <find>self.maxslots()</find>
-      <find>setupUi</find>
-      <find>qr</find>
+      <find>failed to</find>
+      <find>timer</find>
+      <find>btn</find>
+      <find>update_schedule</find>
+      <find>self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room'],) is not False:</find>
+      <find>get</find>
+      <find>time_table</find>
+      <find>setup_screen_li</find>
+      <find>setup_screen_lis</find>
+      <find>save_pr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,47 +235,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/PiTest.wsgi.py" />
-        <option value="$PROJECT_DIR$/PiTest.wsgi" />
-        <option value="$PROJECT_DIR$/quickstart.py" />
-        <option value="$PROJECT_DIR$/PiTest.py" />
-        <option value="$PROJECT_DIR$/uiTest.py" />
-        <option value="$PROJECT_DIR$/ui.py" />
-        <option value="$PROJECT_DIR$/shit.py" />
-        <option value="$PROJECT_DIR$/designer/scheduleScreen" />
-        <option value="$PROJECT_DIR$/designer/scheduleScreen.py" />
-        <option value="$PROJECT_DIR$/schedule.py" />
-        <option value="$PROJECT_DIR$/designer/homeScreen.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/home.py" />
-        <option value="$PROJECT_DIR$/RPi/GPIO.py" />
-        <option value="$PROJECT_DIR$/jsonthings.py" />
-        <option value="$PROJECT_DIR$/savestuff.py" />
-        <option value="$PROJECT_DIR$/tests/unittest.py" />
-        <option value="$PROJECT_DIR$/setup.json" />
-        <option value="$PROJECT_DIR$/scheduleRadio.py" />
-        <option value="$PROJECT_DIR$/test_defects.py" />
-        <option value="$PROJECT_DIR$/error.py" />
-        <option value="$PROJECT_DIR$/reservations.py" />
-        <option value="$PROJECT_DIR$/scheduler.py" />
-        <option value="$PROJECT_DIR$/defects.py" />
-        <option value="$PROJECT_DIR$/apiConnect.py" />
-        <option value="$PROJECT_DIR$/test_getData.py" />
-        <option value="$PROJECT_DIR$/test_parseData.py" />
-        <option value="$PROJECT_DIR$/tests/test_parseData.py" />
-        <option value="$PROJECT_DIR$/tests/test_getData.py" />
         <option value="$PROJECT_DIR$/tests/test_apiConnect.py" />
         <option value="$PROJECT_DIR$/tests/test_defects.py" />
-        <option value="$PROJECT_DIR$/test_reservations.py" />
         <option value="$PROJECT_DIR$/test_scheduler.py" />
-        <option value="$PROJECT_DIR$/tests/test_reservations.py" />
         <option value="$PROJECT_DIR$/tests/test_scheduler.py" />
         <option value="$PROJECT_DIR$/sleepTimer.py" />
-        <option value="$PROJECT_DIR$/test_mainUi.py" />
-        <option value="$PROJECT_DIR$/tests/test_mainUi.py" />
-        <option value="$PROJECT_DIR$/qrCode.py" />
+        <option value="$PROJECT_DIR$/dbUpdate.py" />
+        <option value="$PROJECT_DIR$/scheduler.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/apiConnect.py" />
+        <option value="$PROJECT_DIR$/db.py" />
+        <option value="$PROJECT_DIR$/savestuff.py" />
+        <option value="$PROJECT_DIR$/defects.py" />
+        <option value="$PROJECT_DIR$/Db.py" />
+        <option value="$PROJECT_DIR$/DbUpdate.py" />
+        <option value="$PROJECT_DIR$/ScheduleBackUp.py" />
+        <option value="$PROJECT_DIR$/schedule.json" />
+        <option value="$PROJECT_DIR$/SleepTimer.py" />
+        <option value="$PROJECT_DIR$/Scheduler.py" />
+        <option value="$PROJECT_DIR$/qrCode.py" />
+        <option value="$PROJECT_DIR$/tests/test_Scheduler.py" />
+        <option value="$PROJECT_DIR$/SaveStuff.py" />
+        <option value="$PROJECT_DIR$/setup.json" />
+        <option value="$PROJECT_DIR$/ReservationScreen.py" />
+        <option value="$PROJECT_DIR$/time_table.py" />
+        <option value="$PROJECT_DIR$/timetable.py" />
+        <option value="$PROJECT_DIR$/Time_Schedule.py" />
+        <option value="$PROJECT_DIR$/reservations.py" />
+        <option value="$PROJECT_DIR$/Defects.py" />
+        <option value="$PROJECT_DIR$/Reservations.py" />
+        <option value="$PROJECT_DIR$/TimeTable.py" />
+        <option value="$PROJECT_DIR$/ScheduledBackUp.py" />
+        <option value="$PROJECT_DIR$/test_apiConnect.py" />
+        <option value="$PROJECT_DIR$/tests/test_Reservations.py" />
+        <option value="$PROJECT_DIR$/tests/test_Defects.py" />
+        <option value="$PROJECT_DIR$/test_mainUi.py" />
+        <option value="$PROJECT_DIR$/tests/test_ApiConnect.py" />
+        <option value="$PROJECT_DIR$/tests/test_mainUi.py" />
+        <option value="$PROJECT_DIR$/test_timeTable.py" />
+        <option value="$PROJECT_DIR$/test_scheduledBackUp.py" />
+        <option value="$PROJECT_DIR$/test_reservations.py" />
+        <option value="$PROJECT_DIR$/tests/test_timeTable.py" />
+        <option value="$PROJECT_DIR$/../RaspberryPi/strings.py" />
+        <option value="$PROJECT_DIR$/../RaspberryPi/App.py" />
+        <option value="$PROJECT_DIR$/SetupScreen.py" />
+        <option value="$PROJECT_DIR$/SetupScreenListner.py" />
+        <option value="$PROJECT_DIR$/App.py" />
+        <option value="$PROJECT_DIR$/ApiConnect.py" />
         <option value="$PROJECT_DIR$/designer/main.py" />
+        <option value="$PROJECT_DIR$/strings.py" />
+        <option value="$PROJECT_DIR$/tests/test_reservations.py" />
+        <option value="$PROJECT_DIR$/tests/test_scheduledBackUp.py" />
       </list>
     </option>
   </component>
@@ -168,10 +296,29 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="36" />
-    <option name="y" value="-13" />
-    <option name="width" value="1813" />
-    <option name="height" value="1096" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="978" />
+    <option name="height" value="784" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Python</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>PyPep8Inspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -216,15 +363,6 @@
               <item name="Raspberry pi" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="RaspberryPi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="RaspberryPi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.6 &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -237,7 +375,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/workspace.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/db.sqlite" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/kevin/PycharmProjects/Raspberry pi/designer/main.py" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -259,7 +397,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.App">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -305,7 +443,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="ADDITIONAL_ARGS" value="" />
     </configuration>
-    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="App" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -318,7 +456,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="RaspberryPi" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/App.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,7 +474,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <module name="Raspberry pi" />
     </configuration>
-    <configuration name="Unittests for test_mainUi.TestMainUi" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_ApiConnect.TestApiConnect.test_api_connection" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -348,10 +486,10 @@
       <module name="RaspberryPi" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_mainUi.TestMainUi&quot;" />
+      <option name="_new_target" value="&quot;test_ApiConnect.TestApiConnect.test_api_connection&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Unittests in test_mainUi.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for test_timeTable.TestTimeTable.test_get_time_table" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -363,10 +501,25 @@
       <module name="RaspberryPi" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_mainUi.py&quot;" />
+      <option name="_new_target" value="&quot;test_timeTable.TestTimeTable.test_get_time_table&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests in test_ApiConnect.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="RaspberryPi" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_ApiConnect.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration name="Unittests in test_scheduler.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in test_timeTable.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -378,22 +531,7 @@
       <module name="RaspberryPi" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_scheduler.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-    </configuration>
-    <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="RaspberryPi" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_timeTable.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -478,19 +616,19 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_scheduler.py" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_mainUi.TestMainUi" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_mainUi.py" />
-      <item index="4" class="java.lang.String" itemvalue="Python.app" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_timeTable.py" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for test_timeTable.TestTimeTable.test_get_time_table" />
+      <item index="2" class="java.lang.String" itemvalue="Python.App" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_ApiConnect.TestApiConnect.test_api_connection" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_ApiConnect.py" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.app" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_mainUi.TestMainUi" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_mainUi.py" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_scheduler.py" />
+        <item index="0" class="java.lang.String" itemvalue="Python.App" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_ApiConnect.py" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for test_ApiConnect.TestApiConnect.test_api_connection" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for test_timeTable.TestTimeTable.test_get_time_table" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_timeTable.py" />
       </list>
     </recent_temporary>
   </component>
@@ -655,39 +793,81 @@
       <option name="project" value="LOCAL" />
       <updated>1528066817157</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="#Doing&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Fixed&#10;-bug where qr code wouldnt work on defects screen&#10;&#10;#TODO&#10;Place Comments&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor">
+      <created>1528204093613</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1528204093613</updated>
+    </task>
+    <task id="LOCAL-00023" summary="#Doing&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Done&#10;refactored method and class names to PEP8 standards &#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor">
+      <created>1528695085137</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1528695085137</updated>
+    </task>
+    <task id="LOCAL-00024" summary="#Doing&#10;-disable bookings when there is no connection &#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Done&#10;-Data is now retrieved at start up and inserted into json&#10;-Shows up to 2 weeks from last pull&#10;&#10;#TODO&#10;-make is so that is pulls data every interval&#10;-display time from last pull&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor">
+      <created>1528928042976</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1528928042976</updated>
+    </task>
+    <task id="LOCAL-00025" summary="#Doing&#10;Place Comments and refactor&#10;&#10;#Done&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;#TODO&#10;Write more unit tests&#10;&#10;Home screen:&#10;-Add room capacity (no api call for this)&#10;-Add temperature sensor (not enough time to implement this prolly)">
+      <created>1529213058922</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1529213058922</updated>
+    </task>
+    <task id="LOCAL-00026" summary="#Doing&#10;comments&#10;&#10;#Done&#10;Cleaned up print statements&#10;&#10;#TODO&#10;testing">
+      <created>1529215513989</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1529215513989</updated>
+    </task>
+    <task id="LOCAL-00027" summary="#Doing&#10;Testing&#10;&#10;#Done&#10;added comments and improved speed slightly">
+      <created>1529236482037</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1529236482037</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_mainUi_TestMainUi - 2018.06.04 at 00h 52m 19s.xml">
+    <history-entry file="Unittests_for_test_ApiConnect_TestApiConnect_test_api_connection - 2018.06.18 at 01h 58m 55s.xml">
+      <configuration name="Unittests for test_ApiConnect.TestApiConnect.test_api_connection" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_test_mainUi_TestMainUi - 2018.06.17 at 23h 54m 17s.xml">
       <configuration name="Unittests for test_mainUi.TestMainUi" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_mainUi_TestMainUi - 2018.06.04 at 00h 55m 24s.xml">
+    <history-entry file="Unittests_for_test_mainUi_TestMainUi - 2018.06.17 at 23h 54m 43s.xml">
       <configuration name="Unittests for test_mainUi.TestMainUi" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_mainUi_py - 2018.06.04 at 00h 53m 02s.xml">
-      <configuration name="Unittests in test_mainUi.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_timeTable_TestTimeTable - 2018.06.18 at 00h 01m 35s.xml">
+      <configuration name="Unittests for test_timeTable.TestTimeTable" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_reservations_py - 2018.06.04 at 00h 40m 06s.xml">
-      <configuration name="Unittests in test_reservations.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_timeTable_TestTimeTable_test_get_time_table - 2018.06.18 at 00h 02m 15s.xml">
+      <configuration name="Unittests for test_timeTable.TestTimeTable.test_get_time_table" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_reservations_py - 2018.06.04 at 00h 41m 39s.xml">
-      <configuration name="Unittests in test_reservations.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_timeTable_TestTimeTable_test_get_time_table - 2018.06.18 at 00h 02m 35s.xml">
+      <configuration name="Unittests for test_timeTable.TestTimeTable.test_get_time_table" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scheduler_py - 2018.06.04 at 00h 44m 16s.xml">
-      <configuration name="Unittests in test_scheduler.py" configurationId="tests" />
+    <history-entry file="Unittests_for_test_timeTable_TestTimeTable_test_get_time_table - 2018.06.18 at 00h 04m 01s.xml">
+      <configuration name="Unittests for test_timeTable.TestTimeTable.test_get_time_table" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scheduler_py - 2018.06.04 at 00h 48m 48s.xml">
-      <configuration name="Unittests in test_scheduler.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_ApiConnect_py - 2018.06.18 at 01h 59m 01s.xml">
+      <configuration name="Unittests in test_ApiConnect.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_scheduler_py - 2018.06.04 at 00h 49m 45s.xml">
-      <configuration name="Unittests in test_scheduler.py" configurationId="tests" />
+    <history-entry file="Unittests_in_test_timeTable_py - 2018.06.18 at 00h 01m 54s.xml">
+      <configuration name="Unittests in test_timeTable.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.06.04 at 00h 50m 18s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.06.04 at 00h 58m 25s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_in_test_timeTable_py - 2018.06.18 at 00h 03m 52s.xml">
+      <configuration name="Unittests in test_timeTable.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -704,28 +884,30 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27604166" sideWeight="0.5042644" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.31739572" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1441" y="169" width="1177" height="564" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" show_stripe_button="true" weight="0.31739572" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" x="-1365" y="152" width="1046" height="680" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1401919" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12846482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296582" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27604166" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27604166" sideWeight="0.49573562" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -751,7 +933,16 @@
     <MESSAGE value="#Doing&#10;Cleaning up code and commenting everything&#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#TODO&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
     <MESSAGE value="#Doing&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor&#10;&#10;Testing&#10;-unit tests&#10;-integration test" />
     <MESSAGE value="#Doing&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Added&#10;-Unit tests and integration tests&#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
-    <option name="LAST_COMMIT_MESSAGE" value="#Doing&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Added&#10;-Unit tests and integration tests&#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
+    <MESSAGE value="#Doing&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Fixed&#10;-bug where qr code wouldnt work on defects screen&#10;&#10;#TODO&#10;Place Comments&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
+    <MESSAGE value="#Doing&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Done&#10;refactored method and class names to PEP8 standards &#10;&#10;#TODO&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
+    <MESSAGE value="#Doing&#10;-disable bookings when there is no connection &#10;&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;#Done&#10;-Data is now retrieved at start up and inserted into json&#10;-Shows up to 2 weeks from last pull&#10;&#10;#TODO&#10;-make is so that is pulls data every interval&#10;-display time from last pull&#10;Place Comments&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
+    <MESSAGE value="#Doing&#10;Place Comments and refactor&#10;&#10;#Done&#10;Schedule:&#10;-small bug where if you change from one day to another without selecting a new slot the max slots doesnt get updated&#10;&#10;-add local db as failsafe for when there is no network connection &#10;-figure out a way to sync this with main db&#10;-disable bookings when there is no connection &#10;&#10;#TODO&#10;Write more unit tests&#10;&#10;Home screen:&#10;-Add room capacity (no api call for this)&#10;-Add temperature sensor (not enough time to implement this prolly)" />
+    <MESSAGE value="#Doing&#10;comments&#10;&#10;#Done&#10;Cleaned up print statements&#10;&#10;#TODO&#10;testing" />
+    <MESSAGE value="#Doing&#10;Testing&#10;&#10;#Done&#10;added comments and improved speed slightly" />
+    <MESSAGE value="Done?" />
+    <MESSAGE value="#Done&#10;&#10;#TODO&#10;&#10;Home screen:&#10;-Add room capacity&#10;-Add temperature sensor" />
+    <MESSAGE value="#Doing&#10;more tests&#10;&#10;#Done&#10;tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="#Doing&#10;more tests&#10;&#10;#Done&#10;tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -762,16 +953,16 @@
           <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="57" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="78" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="self.taken" />
-        <watch expression="self.selectedSlot" />
-        <watch expression="self.slot" />
-        <watch expression="self.maxSlots" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -783,288 +974,419 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PiTest.py" />
-    <entry file="file://$PROJECT_DIR$/ui.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$PROJECT_DIR$/qr/qr.jpg" />
-    <entry file="file://$PROJECT_DIR$/schedule.py" />
-    <entry file="file://$PROJECT_DIR$/designer/scheduleScreen.py" />
-    <entry file="file://$PROJECT_DIR$/designer/homeScreen.py" />
-    <entry file="file://$PROJECT_DIR$/home.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/multiprocessing/pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="265" column="0" lean-forward="false" selection-start-line="265" selection-start-column="0" selection-end-line="265" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/urllib/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="652" column="54" lean-forward="true" selection-start-line="652" selection-start-column="54" selection-end-line="652" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RPi/GPIO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RPi/__init__.py">
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/schedule1.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/models.py">
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/schedule0.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="846" column="0" lean-forward="false" selection-start-line="846" selection-start-column="0" selection-end-line="846" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/json/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="237" column="0" lean-forward="false" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/json/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QLCDNumber.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
+        <state relative-caret-position="311">
           <caret line="59" column="8" lean-forward="false" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtCore/QRect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="57" column="15" lean-forward="true" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="101" column="73" lean-forward="true" selection-start-line="101" selection-start-column="73" selection-end-line="101" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/hooks.py">
+    <entry file="file://$PROJECT_DIR$/Db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="493">
+          <caret line="31" column="62" lean-forward="false" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/api.py">
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state relative-caret-position="19244">
+          <caret line="1133" column="39" lean-forward="false" selection-start-line="1133" selection-start-column="39" selection-end-line="1133" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/sessions.py">
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QMainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="344" column="0" lean-forward="false" selection-start-line="344" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
+        <state relative-caret-position="153">
+          <caret line="13" column="6" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/utils.py">
+    <entry file="file://$PROJECT_DIR$/ReservationScreen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="740" column="0" lean-forward="false" selection-start-line="740" selection-start-column="0" selection-end-line="740" selection-end-column="0" />
+        <state relative-caret-position="17">
+          <caret line="1" column="26" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/requests/structures.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/json/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state relative-caret-position="799">
+          <caret line="356" column="0" lean-forward="false" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/abc.py">
+    <entry file="file://$PROJECT_DIR$/SleepTimer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="32" lean-forward="false" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QLabel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="270" column="8" lean-forward="false" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/schedule.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="3" lean-forward="true" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/designer/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="218" column="63" lean-forward="false" selection-start-line="218" selection-start-column="63" selection-end-line="218" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/SetupScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/SaveStuff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/setup.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/ApiConnect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="10" lean-forward="false" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/Defects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_apiConnect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/unittest/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_mainUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/ScheduledBackUp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_reservations.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="219" column="0" lean-forward="false" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
+          <caret line="26" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/_collections_abc.py">
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="395" column="0" lean-forward="false" selection-start-line="395" selection-start-column="0" selection-end-line="395" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QStackedWidget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="174" column="14" lean-forward="true" selection-start-line="174" selection-start-column="14" selection-end-line="174" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scheduleRadio.py" />
-    <entry file="file://$PROJECT_DIR$/tests/unittest.py" />
-    <entry file="file://$PROJECT_DIR$/error.py" />
-    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/902552394/PyQt5/QtWidgets/QButtonGroup.py">
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/TimeTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-312">
-          <caret line="46" column="21" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="21" />
+        <state relative-caret-position="113">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/qrCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/Reservations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_Scheduler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_scheduledBackUp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="34" lean-forward="false" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_Defects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="40" lean-forward="false" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_ApiConnect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_reservations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/strings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="60" lean-forward="true" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/tests/test_timeTable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RaspberryPi/App.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schedule.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schedule1.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScheduledBackUp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <element signature="e#186#223#0" expanded="false" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SaveStuff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Defects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/setup.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_parseData.py" />
-    <entry file="file://$PROJECT_DIR$/tests/test_getData.py" />
-    <entry file="file://$PROJECT_DIR$/defects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/savestuff.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+          <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_defects.py">
+    <entry file="file://$PROJECT_DIR$/App.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_reservations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="8" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="29" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleepTimer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_apiConnect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="95" lean-forward="true" selection-start-line="23" selection-start-column="95" selection-end-line="23" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_mainUi.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apiConnect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="16" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_scheduler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="18" lean-forward="false" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reservations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="31" lean-forward="false" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="82" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/qrCode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+        <state relative-caret-position="218">
+          <caret line="45" column="46" lean-forward="true" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/designer/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="54" column="47" lean-forward="true" selection-start-line="54" selection-start-column="47" selection-end-line="54" selection-end-column="47" />
+        <state relative-caret-position="493">
+          <caret line="32" column="64" lean-forward="false" selection-start-line="32" selection-start-column="64" selection-end-line="32" selection-end-column="64" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qr/qr.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/ApiConnect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
+    <entry file="file://$PROJECT_DIR$/TimeTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="159" column="37" lean-forward="true" selection-start-line="159" selection-start-column="37" selection-end-line="159" selection-end-column="37" />
+        <state relative-caret-position="317">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SetupScreenListener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_timeTable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_scheduledBackUp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="12" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_ApiConnect.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_Defects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_reservations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

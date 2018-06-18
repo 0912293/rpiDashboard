@@ -27,7 +27,7 @@ class TestScheduler(TestCase):  # TODO Not sure yet how to test radio buttons
 
     def test_get_reservations(self):
         s = Reservations()
-        self.setupUi(self)
+        # self.setupUi(self)
         s.get_reservations("H.3.403", Date(), self.initButtons())
 
     def test_get_time_slot_data(self):

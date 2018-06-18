@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
         self.distanceTest.setGeometry(QtCore.QRect(1250, 760, 141, 31))
         self.distanceTest.setObjectName("distanceTest")
         self.backup_time_lbl = QtWidgets.QLabel(self.home)
-        self.backup_time_lbl.setGeometry(QtCore.QRect(5, 1055, 300, 31))
+        self.backup_time_lbl.setGeometry(QtCore.QRect(5, 1055, 400, 31))
         self.backup_time_lbl.setObjectName("back up timer")
         self.connection_status_label = QtWidgets.QLabel(self.home)
         self.connection_status_label.setGeometry(QtCore.QRect(5, 1070, 300, 31))

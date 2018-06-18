@@ -1,0 +1,1 @@
+[{"fields": {"date": "08-07-2018", "lesson": "ICTLAB", "room": "H.3.403", "studentgroup": "INF3C", "timefrom": "15:50:00", "timeslotfrom": 9, "timeslotto": 9, "timeto": "16:40:00", "username": "COSTG", "weeknummer": 27}, "model": "web.schedule", "pk": 237}]

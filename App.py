@@ -23,10 +23,10 @@ from TimeTable import TimeTable
 from Reservations import Reservations
 from ScheduledBackUp import ScheduledBackUp
 import strings
-from SetupScreen import SetupScreen
+from SetupScreenListener import SetupScreenListener
 
 
-class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
+class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
     def __init__(self, parent=None):
         self.defects = Defects()
         self.time_table = TimeTable()
@@ -39,12 +39,12 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
         self.setupUi(self)
         self.init_ui()
 
-        self.setupScreen = SetupScreen(self.roomNumTbox, self.stackedWidget)
+        self.setup_screen_listener = SetupScreenListener(self.roomNumTbox, self.stackedWidget)
 
         if not SaveStuff.check(strings.f_config):   # checks if the config file exists
             self.stackedWidget.setCurrentIndex(4)   # if this is the first time running the rpi it will setup the room
             SaveStuff.create(strings.f_config)
-            self.savebtn.clicked.connect(self.save_press)
+            self.savebtn.clicked.connect(self.setup_screen_listener.save_press)
         else:
             self.stackedWidget.setCurrentIndex(0)
             self.get_time_table()

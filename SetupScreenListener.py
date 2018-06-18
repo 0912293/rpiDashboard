@@ -2,7 +2,7 @@ import strings
 import SaveStuff
 
 
-class SetupScreen:
+class SetupScreenListener:
     def __init__(self, room_num_tbox, stacked_widget):
         self.room_num_tbox = room_num_tbox
         self.stacked_widget = stacked_widget
