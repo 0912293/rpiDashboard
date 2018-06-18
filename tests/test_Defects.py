@@ -8,6 +8,7 @@ class TestDefects(TestCase):
         d.get_defects("H.3.403")
         for i in d.get_defect_table_data():
             print(i)
+            self.assertNotEqual(i, None)
 
     def test_getDefectTableData(self):
         d = Defects()

@@ -2,6 +2,7 @@ import json
 import requests
 import strings
 
+
 class ApiConnect:
     def __init__(self):
         self.data = None

@@ -25,11 +25,11 @@ class TestScheduler(TestCase):  # TODO Not sure yet how to test radio buttons
             rbg.addButton(QtWidgets.QRadioButton)
         return rbg
 
-    def test_getSchedule(self):
+    def test_get_reservations(self):
         s = Reservations()
         self.setupUi(self)
         s.get_reservations("H.3.403", Date(), self.initButtons())
 
-    def test_getTimeSlotData(self):
+    def test_get_time_slot_data(self):
         s = Reservations()
         self.assertEqual(s.get_time_slot_data(), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])

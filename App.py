@@ -78,10 +78,10 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
         QMainWindow.showFullScreen(self)
         self.defectsBtn.clicked.connect(self.menu_buttons)
         self.defectBack.clicked.connect(self.menu_buttons)
-        self.generateDefect.clicked.connect(self.menu_buttons)
+        self.generateDefect.clicked.connect(self.qr_buttons)
         self.scheduleBtn.clicked.connect(self.menu_buttons)
         self.scheduleBack.clicked.connect(self.menu_buttons)
-        self.generate.clicked.connect(self.menu_buttons)
+        self.generate.clicked.connect(self.qr_buttons)
 
         self.calendarWidget.clicked.connect(self.get_time_table)
 
@@ -137,9 +137,13 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
                 self.stackedWidget.setCurrentIndex(1)
                 self.error_schedule_event("No connection")
         elif sender is self.defectsBtn:
-            self.defects.get_defects(SaveStuff.read(strings.f_config)['room'])
-            self.set_defect_table(self.defects.get_defect_table_data())
-            self.stackedWidget.setCurrentIndex(3)
+            if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:    # checks if there is a connection otherwise prevent user from making reservations
+                self.defects.get_defects(SaveStuff.read(strings.f_config)['room'])
+                self.set_defect_table(self.defects.get_defect_table_data())
+                self.stackedWidget.setCurrentIndex(3)
+            else:
+                self.stackedWidget.setCurrentIndex(1)
+                self.error_schedule_event("No connection")
         elif sender is self.defectBack:
             self.defectQr.clear()
             self.get_time_table()
@@ -148,7 +152,11 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreen):
             self.scheduleQr.clear()
             self.get_time_table()
             self.stackedWidget.setCurrentIndex(1)
-        elif sender is self.generateDefect:
+
+    def qr_buttons(self):
+        sender = self.sender()  # checks which button was clicked
+        self.reset_time()  # resets sleep timer so the screen doesn't turn off while someone is using it
+        if sender is self.generateDefect:
             if self.schedule_backup.check_connection(SaveStuff.read(strings.f_config)['room']) is not False:   # checks if there is a connection otherwise prevent user from submiting defects
                 qrCode.generate_defect_qr(strings.f_qr_pic, self.defectTypeBox.currentText(),
                                           SaveStuff.read(strings.f_config)['room'])
