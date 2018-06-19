@@ -24,8 +24,10 @@ class ScheduledBackUp:
                 self.apiC.get_data(body, strings.booking_url)
             except:
                 pass
-            if "fields" in self.apiC.get_dump():
-                SaveStuff.write(json.loads(self.apiC.get_dump()), str(filename+str(i)+".json"))
+            if "fields" in self.apiC.get_dump() and SaveStuff.check(str(filename+str(i)+".json")) or \
+                    "fields" not in self.apiC.get_dump() and not SaveStuff.check(str(filename+str(i)+".json")) or\
+                    "fields" in self.apiC.get_dump() and not SaveStuff.check(str(filename+str(i)+".json")):
+                SaveStuff.write(json.loads(self.apiC.get_dump()), str(filename + str(i) + ".json"))
 
     def check_connection(self, room):
         body = {"room": room, "weeknummer": self.week}

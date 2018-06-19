@@ -122,7 +122,7 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
                                                  self.calendarWidgetSchedule.selectedDate(), self.radioButtonGroup)
         except:
             self.error_schedule_event("Failed to retrieve bookings")
-        self.set_scheduler_table()
+        self.__reservations.set_scheduler_table(self.radioButtonGroup)
         self.slot = 0
         self.maxSlots = 10
         self.max_slots()
@@ -130,7 +130,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
             self.slot = self.maxSlots
 
 # ---------Button stuff------------
-
     def menu_buttons(self):
         sender = self.sender()  # checks which button was clicked
         self.reset_time()       # resets sleep timer so the screen doesn't turn off while someone is using it
@@ -208,7 +207,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
             self.lcdSlots.display(self.slot)
 
 # ----------reservation ui------------
-
     def radio_check(self):
         sender = self.sender()
         self.reset_time()
@@ -246,7 +244,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
         return True
 
 # ----------sensor--------------
-
     def distance_sensor(self):
         GPIO.setmode(GPIO.BOARD)
         PIN_TRIGGER = 7
@@ -300,16 +297,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
         self.stackedWidget.setCurrentIndex(1)
 
 # -------------data stuff-------------
-
-    def set_scheduler_table(self):
-        time_slot_data = self.__reservations.get_time_slot_data()
-        j = 0
-        for i in self.radioButtonGroup.buttons():
-            if time_slot_data[j] != j + 1:      # inserts data into view and disables radio buttons that are unavailable
-                i.setText(time_slot_data[j])
-                i.setEnabled(False)
-            j += 1
-
     def set_time_table(self):
         model = QStringListModel(self.__time_table.get_time_table_data())
         self.listView.setModel(model)       # inserts model into view
@@ -336,7 +323,6 @@ class MainUi(QMainWindow, main.Ui_MainWindow, SetupScreenListener):
         self.backup_data()
 
 # ------------------events-------------
-
     def error_schedule_event(self, string):     # error event to give feedback to the user if something goes wrong
         reply = QMessageBox.question(self, 'Message',
                                      "An error has occurred: %s" % string, QMessageBox.Ok)

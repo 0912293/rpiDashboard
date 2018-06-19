@@ -16,9 +16,9 @@ class Defects:
     @staticmethod
     def get_defunct_types(defect_type_box):     # currently a hard coded list but would've like for this to be retrieved from api if that was a possibility
         defect_type_box.addItem("notype")
-        defect_type_box.addItem("type 1")
-        defect_type_box.addItem("type 2")
-        defect_type_box.addItem("type 3")
+        defect_type_box.addItem("missing")
+        defect_type_box.addItem("software")
+        defect_type_box.addItem("broken")
 
     def __get_data(self, room, url):
         body = {"room": room}

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Defects import Defects
+from Defects.Defects import Defects
 import requests
 
 class TestDefects(TestCase):

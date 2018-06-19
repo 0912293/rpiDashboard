@@ -49,3 +49,12 @@ class Reservations:
 
     def get_time_slot_data(self):
         return self.timeSlotData
+
+    def set_scheduler_table(self, rbg):
+        time_slot_data = self.get_time_slot_data()
+        j = 0
+        for i in rbg.buttons():
+            if time_slot_data[j] != j + 1:      # inserts data into view and disables radio buttons that are unavailable
+                i.setText(time_slot_data[j])
+                i.setEnabled(False)
+            j += 1

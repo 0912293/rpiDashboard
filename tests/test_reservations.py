@@ -10,24 +10,30 @@ class Date:
 
     @staticmethod
     def month():
-        return 10
+        return 7
 
     @staticmethod
     def day():
-        return 13
+        return 16
 
 
-class TestScheduler(TestCase):  # TODO Not sure yet how to test radio buttons
+class TestScheduler(TestCase):
+    rbg = QtWidgets.QButtonGroup()
+
     def initButtons(self):
-        rbg = QtWidgets.QButtonGroup()
         for i in range(1, 15):
-            rbg.addButton(QtWidgets.QRadioButton)
-        return rbg
+            b = QtWidgets.QRadioButton()
+            b.setObjectName(str(i))
+            self.rbg.addButton(b, i)
+        return self.rbg
 
     def test_get_reservations(self):
         s = Reservations()
-        # self.setupUi(self)
-        s.get_reservations("H.3.403", Date(), self.initButtons())
+        s.get_reservations("H.3.403", Date(), self.rbg)
+        s.set_scheduler_table(self.rbg)
+        for i in self.rbg.buttons():
+            print(i.text())
+            self.assertEqual(i.text, None)
 
     def test_get_time_slot_data(self):
         s = Reservations()
