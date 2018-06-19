@@ -1,6 +1,5 @@
 from unittest import TestCase
-from Reservations import Reservations
-import requests
+from Reservation.Reservations import Reservations
 from PyQt5 import QtWidgets
 
 

@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QTableView
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -26,9 +27,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.sleep)
         self.home = QtWidgets.QWidget()
         self.home.setObjectName("home")
-        self.distanceTest = QtWidgets.QLabel(self.home)
-        self.distanceTest.setGeometry(QtCore.QRect(1250, 760, 141, 31))
-        self.distanceTest.setObjectName("distanceTest")
         self.backup_time_lbl = QtWidgets.QLabel(self.home)
         self.backup_time_lbl.setGeometry(QtCore.QRect(5, 1055, 400, 31))
         self.backup_time_lbl.setObjectName("back up timer")
@@ -44,12 +42,9 @@ class Ui_MainWindow(object):
         self.defectsBtn = QtWidgets.QPushButton(self.home)
         self.defectsBtn.setGeometry(QtCore.QRect(1420, 720, 491, 341))
         self.defectsBtn.setObjectName("defectsBtn")
-        self.lblCapacity_home = QtWidgets.QLabel(self.home)
-        self.lblCapacity_home.setGeometry(QtCore.QRect(1250, 740, 141, 31))
-        self.lblCapacity_home.setObjectName("lblCapacity_home")
-        self.lblTemperature_home = QtWidgets.QLabel(self.home)
-        self.lblTemperature_home.setGeometry(QtCore.QRect(1250, 930, 141, 31))
-        self.lblTemperature_home.setObjectName("lblTemperature_home")
+        self.statisticsBtn = QtWidgets.QPushButton(self.home)
+        self.statisticsBtn.setGeometry(QtCore.QRect(1220, 720, 200, 100))
+        self.statisticsBtn.setObjectName("statisticsBtn")
         self.listView = QtWidgets.QListView(self.home)
         self.listView.setGeometry(QtCore.QRect(0, 20, 701, 1041))
         self.listView.setObjectName("listView")
@@ -197,6 +192,33 @@ class Ui_MainWindow(object):
         self.savebtn.setObjectName("scheduleBtn")
         self.stackedWidget.addWidget(self.setupScreen)
 
+        self.stats = QtWidgets.QWidget()
+        self.stats.setObjectName("stats")
+        self.stackedWidget.addWidget(self.stats)
+        self.statisticsBackBtn = QtWidgets.QPushButton(self.stats)
+        self.statisticsBackBtn.setGeometry(QtCore.QRect(1420, 720, 491, 341))
+        self.statisticsBackBtn.setObjectName("Back")
+
+        self.interactionlbl = QtWidgets.QLabel(self.stats)
+        self.interactionlbl.setGeometry(QtCore.QRect(100, 50, 500, 50))
+        self.interactionlbl.setObjectName("interactionlbl")
+        self.interactionTable = QTableWidget(self.stats)
+        self.interactionTable.setRowCount(2)
+        self.interactionTable.setColumnCount(7)
+        self.interactionTable.setGeometry(QtCore.QRect(100, 100, 1000, 100))
+        self.interactionTable.horizontalHeader().hide()
+        self.interactionTable.verticalHeader().hide()
+
+        self.passlbl = QtWidgets.QLabel(self.stats)
+        self.passlbl.setGeometry(QtCore.QRect(100, 300, 500, 50))
+        self.passlbl.setObjectName("passlbl")
+        self.passTable = QTableWidget(self.stats)
+        self.passTable.setRowCount(2)
+        self.passTable.setColumnCount(7)
+        self.passTable.setGeometry(QtCore.QRect(100, 350, 1000, 100))
+        self.passTable.horizontalHeader().hide()
+        self.passTable.verticalHeader().hide()
+
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -207,12 +229,9 @@ class Ui_MainWindow(object):
         self.scheduleQr.setText(_translate("MainWindow", " "))
         self.defectQr.setText(_translate("MainWindow", " "))
         self.wakeButton.setText(_translate("MainWindow", ""))
-        self.distanceTest.setText(_translate("MainWindow", " "))
         self.scheduleBtn.setText(_translate("MainWindow", "Schedule"))
         self.defectsBtn.setText(_translate("MainWindow", "Defects"))
         self.lblSlots.setText(_translate("MainWindow", "Slots"))
-        self.lblCapacity_home.setText(_translate("MainWindow", " "))
-        self.lblTemperature_home.setText(_translate("MainWindow", " "))
         self.generate.setText(_translate("MainWindow", "Generate"))
         self.scheduleBack.setText(_translate("MainWindow", "Back"))
         self.lblCapacity.setText(_translate("MainWindow", " "))
@@ -245,3 +264,7 @@ class Ui_MainWindow(object):
         self.defectBack.setText(_translate("MainWindow", "Back"))
         self.generateDefect.setText(_translate("MainWindow", "Generate"))
 
+        self.interactionlbl.setText(_translate("MainWindow", "Amount of people that interacted with the raspberry in the past 7 days"))
+        self.passlbl.setText(_translate("MainWindow", "Amount of people that walked passed the raspberry in the past 7 days"))
+        self.statisticsBtn.setText(_translate("Mainwindow", "Statistics"))
+        self.statisticsBackBtn.setText(_translate("Mainwindow", "Back"))

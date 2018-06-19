@@ -1,7 +1,7 @@
 import json
 import strings
 # from Reservations import Reservations
-from Defects import Defects
+from Defects.Defects import Defects
 from ApiConnect import ApiConnect
 import datetime
 import SaveStuff
@@ -31,10 +31,6 @@ class ScheduledBackUp:
         body = {"room": room, "weeknummer": self.week}
         return self.apiC.check_connection(body)
 
-    def __insert_into(self, filename):
-        self.schedule = SaveStuff.read(filename)
-        return self.schedule
-
     def get_schedule(self, filename):
         self.schedule = SaveStuff.read(filename)
         return self.schedule
@@ -44,6 +40,3 @@ class ScheduledBackUp:
         SaveStuff.create(filename+".json")
         SaveStuff.write({"week": datetime.date(date.year, date.month, date.day).isocalendar()[1]},
                         filename+".json")
-
-    def update_defects(self):
-        pass

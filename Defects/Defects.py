@@ -1,4 +1,3 @@
-import datetime
 import strings
 from ApiConnect import ApiConnect
 
@@ -6,10 +5,10 @@ from ApiConnect import ApiConnect
 class Defects:
     def __init__(self):
         self.apiC = ApiConnect()
-        self.defectTableData = []
+        self.__defect_table_data = []
 
     def __enter_defects(self, description, handled, type):
-        self.defectTableData.append(str(type)+": "+str(description)+". Handled:"+str(handled))
+        self.__defect_table_data.append(str(type) + ": " + str(description) + ". Handled:" + str(handled))
 
     def get_defects(self, room):
         self.__get_data(room, strings.defect_url)
@@ -31,4 +30,4 @@ class Defects:
             self.__enter_defects(i["fields"]["description"], i["fields"]["handled"], i["fields"]["type"])
 
     def get_defect_table_data(self):
-        return self.defectTableData     # returns model
+        return self.__defect_table_data     # returns model

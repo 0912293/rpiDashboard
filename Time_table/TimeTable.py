@@ -6,8 +6,8 @@ from ScheduledBackUp import ScheduledBackUp
 
 class TimeTable:
     def __init__(self):
-        self.backup = ScheduledBackUp()
-        self.apiC = ApiConnect()
+        self.__backup = ScheduledBackUp()
+        self.__apiC = ApiConnect()
         self.__timeTableData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     def __enter_reservation(self, time_from, time_to, string):
@@ -22,11 +22,11 @@ class TimeTable:
         try:
             self.__get_data(room, week, date, strings.booking_url)      # tries to get data from api, if this fails it retrieves data from back files
         except:
-            data = self.backup.get_schedule(strings.f_schedule_json)
+            data = self.__backup.get_schedule(strings.f_schedule_json)
             schedule = None
             if week-data["week"] <= 2:
-                schedule = self.backup.get_schedule(strings.f_backup_schedule +
-                                                    str(week-data["week"])+".json")
+                schedule = self.__backup.get_schedule(strings.f_backup_schedule +
+                                                      str(week-data["week"]) +".json")
             self.__parse_data(schedule, date)
 
     def __fill_empty_list(self):
@@ -35,7 +35,7 @@ class TimeTable:
 
     def __get_data(self, room, week, date, url):
         body = {"room": room, "weeknummer": week}
-        data = self.apiC.get_data(body, url)
+        data = self.__apiC.get_data(body, url)
         self.__parse_data(data, date)
 
     def __parse_data(self, data, date):
